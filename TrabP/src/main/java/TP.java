@@ -234,7 +234,7 @@ public class TP {
    
    
    }
-   private static boolean check1 (int[] generico){
+    public static boolean check1 (int[] generico){
        boolean r;
        int i=0;
        r= generico[i]<generico[i+1];
@@ -243,6 +243,7 @@ public class TP {
         }else{
             
         }
-   }
+    return r;
+    }
    
 }
