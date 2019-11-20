@@ -204,6 +204,8 @@ public class TP {
    }
    public static void sortBetGru(String[][]equipaGrupo,int i1,int i,int limite,int[] pontuacao){
        int i2=i1;
+       boolean r=true;
+       while (r){
        for (i=i1;i<i1+3;i++){
            if (pontuacao[i]<pontuacao[i+1]){
                sortGru(equipaGrupo,i2+1,i,limite,pontuacao);
@@ -228,20 +230,46 @@ public class TP {
                }
                
            }
+           if (i>i1){
+           r=check1(pontuacao,equipaGrupo,i);
+           if (r){
+               i=i-2;
+               i2=i2-2;
+           }
+       }
        i2++;
-       
+       }
        }
    
    
    }
-    public static boolean check1 (int[] generico){
+    public static boolean check1 (int[] generico,String[][]equipaGrupo,int i){
        boolean r;
-       int i=0;
+       i=i-1;
        r= generico[i]<generico[i+1];
         if (r){
             return r;
-        }else{
-            
+                
+            }else{
+            if (generico[i]==generico[i+1]){
+                r = Integer.parseInt(equipaGrupo[i][6])<Integer.parseInt(equipaGrupo[i+1][6]);
+                if (r){
+                    return r;
+                    
+                }else{
+                    if (Integer.parseInt(equipaGrupo[i][6])==Integer.parseInt(equipaGrupo[i+1][6])){
+                        r = Integer.parseInt(equipaGrupo[i][7])>Integer.parseInt(equipaGrupo[i+1][7]);
+                        if (r){
+                            return r;
+                        }else{
+                            r = equipaGrupo[i][1].compareTo(equipaGrupo[i+1][1])>0;
+                            if (r){
+                                return r;
+                            }
+                        }
+                    }
+                }
+            }   
         }
     return r;
     }
