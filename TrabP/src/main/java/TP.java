@@ -105,7 +105,8 @@ public class TP {
                     if (i1==4){
                         i=i1-1;
                         int i2=0;
-                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao);
+                        int cont=i;
+                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao,cont);
                     }
                     break;
                 case "B":
@@ -116,7 +117,8 @@ public class TP {
                     if (i1==8){
                         i=i1-1;
                         int i2=4;
-                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao);
+                        int cont=i;
+                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao,cont);
                     }
                     break;     
                 case "C":
@@ -127,7 +129,8 @@ public class TP {
                     if (i1==12){
                         i=i1-1;
                         int i2=8;
-                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao);
+                        int cont=i;
+                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao,cont);
                     }
                     break;
                 case "D":
@@ -138,7 +141,8 @@ public class TP {
                     if (i1==16){
                         i=i1-1;
                         int i2=12;
-                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao);
+                        int cont=i;
+                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao,cont);
                     }
                     break;
                 case "E":
@@ -149,7 +153,8 @@ public class TP {
                     if (i1==20){
                         i=i1-1;
                         int i2=16;
-                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao);
+                        int cont=i;
+                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao,cont);
                     }
                     break;
                 case "F":
@@ -160,7 +165,8 @@ public class TP {
                     if (i1==24){
                         i=i1-1;
                         int i2=20;
-                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao);
+                        int cont=i;
+                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao,cont);
                     }
                     break;
                 case "G":
@@ -171,13 +177,19 @@ public class TP {
                     if (i1==28){
                         i=i1-1;
                         int i2=24;
-                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao);
+                        int cont=i;
+                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao,cont);
                     }
                     break;
                 case "H":
-                    if (i1>=28){
-                        sortGru(equipaGrupo,i1,i,limite,pontuacao);
+                    if (i1>=24){
                         i1++;
+                        i++;
+                    if (i1==limite-1){
+                        int i2=limite-2;
+                        int cont=i;
+                        sortBetGru(equipaGrupo,i2,i,limite,pontuacao,cont);
+                    }
                     }
                     break;
                     
@@ -202,11 +214,12 @@ public class TP {
         pontuacao[i1]=ponttemp;
        
    }
-   public static void sortBetGru(String[][]equipaGrupo,int i1,int i,int limite,int[] pontuacao){
+   public static void sortBetGru(String[][]equipaGrupo,int i1,int i,int limite,int[] pontuacao,int cont){
        int i2=i1;
        boolean r=true;
-       while (r){
-       for (i=i1;i<i1+3;i++){
+       int vefCont=0;
+       while (r||vefCont==0){
+       for (i=i1;i<cont;i++){
            if (pontuacao[i]<pontuacao[i+1]){
                sortGru(equipaGrupo,i2+1,i,limite,pontuacao);
            }else{
@@ -232,13 +245,26 @@ public class TP {
            }
            if (i>i1){
            r=check1(pontuacao,equipaGrupo,i);
-           if (r){
-               i=i-2;
-               i2=i2-2;
+           
+           if (!r&&i==cont-1&&vefCont==0){
+               i=i1-1;
+               i2=i1-1;
+               vefCont=1;
+           }else{
+               if (r){
+                  i=i-2;
+                  i2=i2-2;
+                  vefCont=0;
+               }
            }
        }
+           
        i2++;
        }
+       if (i==cont){
+               r=false;
+               vefCont=1;
+           }
        }
    
    
