@@ -29,10 +29,10 @@ public class TP {
             
         }
         cont--;
-        lerManualmente(equipaGrupo,cont);
+        cont = lerManualmente(equipaGrupo,cont);
         return cont;
         }
-    public static void lerManualmente (String[][] equipaGrupo,int limite){
+    public static int lerManualmente (String[][] equipaGrupo,int limite){
         System.out.println("Quer adicionar mais equipas?");
         System.out.println("Se sim,escrever 'Y'");
         String resposta = sc2.nextLine();
@@ -70,7 +70,8 @@ public class TP {
         System.out.println("Se sim,escrever 'Y'");
         resposta = sc2.nextLine();
         }
-        }
+    return limite;    
+    }
         
     public static boolean verificarRepetição(String[][]equipaGrupo,int i1,int limite){
         String resposta=sc2.nextLine();
@@ -82,7 +83,7 @@ public class TP {
                 break;
                 
             }else{
-                equipaGrupo[i1][0]=resposta;
+                equipaGrupo[i1][1]=resposta;
             }
         }
 
@@ -96,7 +97,11 @@ public class TP {
     }
     public static void ordenar(String[][]equipaGrupo,int limite,int[] pontuacao){
         int i1=0;
+        int contG=4;
+        int para=0;
         for (int i=0;i<limite;i++){
+            
+             
             switch(equipaGrupo[i][0]){
                 case "A":
                     
@@ -170,36 +175,47 @@ public class TP {
                     }
                     break;
                 case "G":
-                    if (i1>=24){
+                    if (i1>=24&&para==1){
                     sortGru(equipaGrupo,i1,i,limite,pontuacao);
                     i1++;
                     }
-                    if (i1==28){
+                    if  (i1>=24&&para==0){
+                        contG++;
+                    }
+                    if (contG>5){
+                    if (i1==24+contG-4&&para==1){
                         i=i1-1;
-                        int i2=24;
+                        contG -=4;
+                        int i2=20+contG;
                         int cont=i;
                         sortBetGru(equipaGrupo,i2,i,limite,pontuacao,cont);
+                    }
                     }
                     break;
                 case "H":
-                    if (i1>=24){
-                        i1++;
-                        i++;
-                    if (i1==limite-1){
-                        int i2=limite-2;
+                    if (i1==contG+24){
+                        int i2=limite-(limite-contG-24);
+                        i=limite-1;
                         int cont=i;
                         sortBetGru(equipaGrupo,i2,i,limite,pontuacao,cont);
                     }
-                    }
+                    
+                    
                     break;
-                    
-                    
+            }
+             if (para==0&&i==limite-1){
+                       para=1;
+                       if (contG==4){
+                       contG -=4;
+                       }
+                       i=i1-1;
+                    }      
             }
             
         }
             
-        
-    }
+   
+    
 
    public static void sortGru(String[][]equipaGrupo,int i1,int i,int limite,int[] pontuacao){
        
