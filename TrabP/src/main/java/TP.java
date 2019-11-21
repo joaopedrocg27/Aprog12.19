@@ -217,8 +217,8 @@ public class TP {
    public static void sortBetGru(String[][]equipaGrupo,int i1,int i,int limite,int[] pontuacao,int cont){
        int i2=i1;
        boolean r=true;
-       int vefCont=0;
-       while (r||vefCont==0){
+       
+       while (r){
        for (i=i1;i<cont;i++){
            if (pontuacao[i]<pontuacao[i+1]){
                sortGru(equipaGrupo,i2+1,i,limite,pontuacao);
@@ -246,29 +246,25 @@ public class TP {
            if (i>i1){
            r=check1(pontuacao,equipaGrupo,i);
            
-           if (!r&&i==cont-1&&vefCont==0){
-               i=i1-1;
-               i2=i1-1;
-               vefCont=1;
-           }else{
+          
                if (r){
                   i=i-2;
                   i2=i2-2;
-                  vefCont=0;
                }
            }
-       }
+       
            
        i2++;
        }
        if (i==cont){
-               r=false;
-               vefCont=1;
-           }
+           r=false;
+       }
+       }
+       
        }
    
    
-   }
+   
     public static boolean check1 (int[] generico,String[][]equipaGrupo,int i){
        boolean r;
        i=i-1;
