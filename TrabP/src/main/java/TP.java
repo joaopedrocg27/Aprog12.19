@@ -4,12 +4,16 @@ import java.util.Scanner;
 public class TP {
     static Scanner sc2 = new Scanner (System.in);
     
-    public static void menu(){
+    public static void menu(String[][] equipaGrupo,int limite) throws FileNotFoundException{
         int M=sc2.nextInt();
         switch (M){
             case 1:
                 System.out.println("Ler a informação disponível no ficheiro de texto e armazená-la em memória");
-                lerFicheiro(equipaGrupo);
+                limite=lerFicheiro(equipaGrupo)+1;
+                break;
+            case 2:
+                System.out.println("Inserir manualmente informação de uma seleção (Exemplo: B,Portugal,3,1,2,0,5,4)");
+              //  lerManualmente (equipaGrupo,int limite);
                 
                     
         
@@ -18,9 +22,9 @@ public class TP {
     }
     public static void main (String[] args) throws FileNotFoundException{
             String [][] equipaGrupo = new String [32][8];
-            int limite;
-            limite=lerFicheiro(equipaGrupo);
-            limite++;
+            int limite=0;
+           // limite=lerFicheiro(equipaGrupo);
+           //limite++;
             int []pontuacao=new int[limite];
             calcularPontuacao(equipaGrupo,limite,pontuacao);
             
