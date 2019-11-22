@@ -3,6 +3,17 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class TP {
     static Scanner sc2 = new Scanner (System.in);
+    public static void menu(){
+        int M=sc2.nextInt();
+        switch (M){
+            case 1:
+                System.out.println("hjbgtkerwlmd,çsq.ºa-");
+            
+                    
+        
+        
+        }
+    }
     public static void main (String[] args) throws FileNotFoundException{
             String [][] equipaGrupo = new String [32][8];
             int limite;
