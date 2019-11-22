@@ -3,22 +3,105 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class TP {
     static Scanner sc2 = new Scanner (System.in);
-    
-    public static void menu(String[][] equipaGrupo,int limite) throws FileNotFoundException{
+    public static void printMenu(){
+        System.out.println("1-Ler a informação disponível no ficheiro de texto e armazená-la em memória");
+        System.out.println("2-Inserir manualmente informação de uma seleção (Exemplo: B,Portugal,3,1,2,0,5,4)");
+        System.out.println("3-Calcular e armazenar em memória a pontuação de todas as equipas.");
+        System.out.println("4-Calcular e armazenar em memória a classificação de todas as equipas nos respetivos grupos.");
+        System.out.println("5-Listar a classificação das equipas por grupo;");
+        System.out.println("6-Listar as equipas cujos golos marcados é igual ao máximo de golos marcados");
+        System.out.println("7-Listar as equipas com um determinado número de golos sofridos. Insira o número de golos");
+        System.out.println("8-Listar as equipas que têm mais golos sofridos do que golos marcados, ordenadas alfabeticamente");
+        System.out.println("9-Listar o primeiro classificado de cada grupo");
+        System.out.println("10-Listar informação completa de uma equipa insira o número de golos");
+        System.out.println("11-Criar um ficheiro de texto (Statistics.txt) com estatísticas dos jogos");
+        System.out.println("12-Remover da memória as equipas que não vão disputar a fase seguinte");
+        System.out.println("13-Criar um ficheiro de texto (FinalStage.csv) com as equipas que vão disputar a fase seguinte do campeonato");
+        System.out.println("14-Criar um ficheiro de texto (FinalStageGames.txt) com os jogos da fase final. ");
+        System.out.println("15-Sair");
+    }
+    public static void menu(String[][] equipaGrupo,int limite,int[] pontuacao) throws FileNotFoundException{
         int M=sc2.nextInt();
+        boolean jaLido = false;
+        while(!(M==15)){
         switch (M){
             case 1:
-                System.out.println("Ler a informação disponível no ficheiro de texto e armazená-la em memória");
                 limite=lerFicheiro(equipaGrupo)+1;
+                jaLido=true;
+               // printMenu();
                 break;
             case 2:
-                System.out.println("Inserir manualmente informação de uma seleção (Exemplo: B,Portugal,3,1,2,0,5,4)");
-              //  lerManualmente (equipaGrupo,int limite);
-                
-                    
-        
-        
+                if(!jaLido){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
+                    System.out.println("");
+                }else{
+                lerManualmente (equipaGrupo,limite);
+                jaLido=true;
+                printMenu();
+                }
+                break;
+            case 3 :
+                if(!jaLido){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
+                    System.out.println("");
+                }else{
+                calcularPontuacao(equipaGrupo,limite,pontuacao);    
+                printMenu();
+                break;
+                }
+            case 4 :
+                if(!jaLido){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
+                    System.out.println("");
+                }else{
+                ordenar(equipaGrupo,limite,pontuacao);
+                printMenu();
+                }
+            case 5 :
+//              imprimirGrupo(equipaGrupo,pontuacao,limite);
+                printMenu();
+                break;
+            case 6 :
+                //missing
+                printMenu();
+                break;
+            case 7 :
+                //missing
+                printMenu();
+                break;
+            case 8:
+                //missing
+                printMenu();
+                break;
+            case 9:
+                //missing
+                printMenu();
+                break;
+            case 10:
+                //missing
+                printMenu();
+                break;
+            case 11:
+                //missing
+                printMenu();
+                break;
+            case 12:
+                //missing
+                printMenu();
+                break;
+            case 13:
+                //missing
+                printMenu();
+                break;
+            case 14:
+                //missing
+                printMenu();
+                break;  
+            case 15:
+                break;
+            default:
+                System.out.println("Erro: Opção inválida");
+                break;
         }
+    M=sc2.nextInt();
+    }
     }
     public static void main (String[] args) throws FileNotFoundException{
             String [][] equipaGrupo = new String [32][8];
@@ -30,8 +113,8 @@ public class TP {
             
             ordenar(equipaGrupo,limite,pontuacao);
             System.out.println("Mau mau");
-            
-            
+            printMenu();
+            menu(equipaGrupo,limite,pontuacao);
     }
     public static int lerFicheiro (String[][] equipaGrupo) throws FileNotFoundException {
         File file = new File("PracticalWork.csv");
@@ -55,8 +138,6 @@ public class TP {
         System.out.println("Se sim,escrever 'Y'");
         String resposta = sc2.nextLine();
         while (resposta.equals("Y")){
-            
-        
         for (int i=limite;i<=32;i++){
             boolean r;
             if (equipaGrupo[i][0]==(null)){
@@ -88,9 +169,9 @@ public class TP {
         System.out.println("Se sim,escrever 'Y'");
         resposta = sc2.nextLine();
         }
-    return limite;    
+    printMenu();
+    return limite;   
     }
-        
     public static boolean verificarRepetição(String[][]equipaGrupo,int i1,int limite){
         String resposta=sc2.nextLine();
        boolean r=false;
@@ -231,11 +312,7 @@ public class TP {
             }
             
         }
-            
-   
-    
-
-   public static void sortGru(String[][]equipaGrupo,int i1,int i,int limite,int[] pontuacao){
+    public static void sortGru(String[][]equipaGrupo,int i1,int i,int limite,int[] pontuacao){
        
        for (int ia = 0; ia < 8; ia++) {
         String temp = equipaGrupo[i][ia];
