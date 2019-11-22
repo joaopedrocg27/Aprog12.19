@@ -3,12 +3,14 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class TP {
     static Scanner sc2 = new Scanner (System.in);
+    
     public static void menu(){
         int M=sc2.nextInt();
         switch (M){
             case 1:
-                System.out.println("hjbgtkerwlmd,çsq.ºa-");
-            
+                System.out.println("Ler a informação disponível no ficheiro de texto e armazená-la em memória");
+                lerFicheiro(equipaGrupo);
+                
                     
         
         
@@ -24,6 +26,7 @@ public class TP {
             
             ordenar(equipaGrupo,limite,pontuacao);
             System.out.println("Mau mau");
+            
             
     }
     public static int lerFicheiro (String[][] equipaGrupo) throws FileNotFoundException {
