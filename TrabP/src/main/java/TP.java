@@ -179,8 +179,24 @@ public class TP {
             //ordenar(equipaGrupo,limite,pontuacao);
             boolean[] vef= {false};
             printMenu();
+            boolean r=true;
             int M=sc2.nextInt();
-            while (M!=15){
+            while (M!=1&&M!=2&&M!=2&&M!=15){
+                System.out.println("As opções 1 ou 2 precisam de ser ativadas antes do programa executar");
+                sc2.nextLine();
+                System.out.println("Deseja selecionar outra opção");
+                System.out.println("Selecione 'Y' para confirma");
+                System.out.println("Se selecionar algo diferente de Y o progama irá parar");
+                String resposta=sc2.nextLine();
+                r=resposta.equals("Y");
+                if (r){
+                    M=sc2.nextInt();
+                }else{
+                    break;
+                }
+                
+            }
+            while (M!=15&&r){
             
             if (M==2||M==1){
                 limite=menu(equipaGrupo,limite,pontuacao1,M,vef);
