@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class TP {
     static Scanner sc2 = new Scanner (System.in);
     public static void printMenu(){
+        System.out.println("=================================================MENU========================================================");
+        System.out.println("Insira a opção a executar:");
         System.out.println("1-Ler a informação disponível no ficheiro de texto e armazená-la em memória");
         System.out.println("2-Inserir manualmente informação de uma seleção (Exemplo: B,Portugal,3,1,2,0,5,4)");
         System.out.println("3-Calcular e armazenar em memória a pontuação de todas as equipas.");
@@ -26,79 +28,137 @@ public class TP {
         
         switch (M){
             case 1:
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 limite=lerFicheiro(equipaGrupo)+1;
                 if (!jaLido[0]){
                 //limite++;
                 }
                 jaLido[0]=true;
-               // printMenu();
+                System.out.println("Done");
+                System.out.println(" ");
+                printMenu();
                 break;
             case 2:
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
                     System.out.println("");
                 }else{
                 limite=lerManualmente (equipaGrupo,limite);
                 jaLido[0]=true;
-                printMenu();
-                }
+                System.out.println("Done");
+                System.out.println(" ");
+                printMenu();                }
                 break;
             case 3 :
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
                     System.out.println("");
                 }else{
                     
                 calcularPontuacao(equipaGrupo,limite,pontuacao);    
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;
                 }
             case 4 :
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
                     System.out.println("");
                 }else{
                 ordenar(equipaGrupo,limite,pontuacao);
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 }
             case 5 :
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 imprimirGrupo(equipaGrupo,pontuacao,limite);
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;
             case 6 :
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 maximoGolos(equipaGrupo,limite);
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;
             case 7 :
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 sofridoGolos(equipaGrupo,limite);
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;
             case 8:
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 ordenarDiferencaGolos(equipaGrupo,limite);
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;
             case 9:
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 //missing
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;
             case 10:
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 //missing
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;
             case 11:
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 //missing
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;
             case 12:
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 //missing
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;
             case 13:
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 //missing
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;
             case 14:
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
                 //missing
+                System.out.println("Done");
+                System.out.println(" ");
                 printMenu();
                 break;  
             case 15:
+                System.out.println("============================================== Opçao "+M+" ======================================================");
+                System.out.println(" ");
+                System.out.println("A terminar...");
                 break;
             default:
                 System.out.println("Erro: Opção inválida");
