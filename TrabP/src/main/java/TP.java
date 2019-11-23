@@ -75,6 +75,7 @@ public class TP {
                 System.out.println(" ");
                 printMenu();
                 }
+                break;
             case 5 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
