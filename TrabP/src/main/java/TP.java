@@ -4,23 +4,25 @@ import java.util.Scanner;
 public class TP {
     static Scanner sc2 = new Scanner (System.in);
     public static void printMenu(){
-        System.out.println("=================================================MENU========================================================");
-        System.out.println("Insira a opção a executar:");
-        System.out.println("1-Ler a informação disponível no ficheiro de texto e armazená-la em memória");
-        System.out.println("2-Inserir manualmente informação de uma seleção (Exemplo: B,Portugal,3,1,2,0,5,4)");
-        System.out.println("3-Calcular e armazenar em memória a pontuação de todas as equipas.");
-        System.out.println("4-Calcular e armazenar em memória a classificação de todas as equipas nos respetivos grupos.");
-        System.out.println("5-Listar a classificação das equipas por grupo;");
-        System.out.println("6-Listar as equipas cujos golos marcados é igual ao máximo de golos marcados");
-        System.out.println("7-Listar as equipas com um determinado número de golos sofridos. Insira o número de golos");
-        System.out.println("8-Listar as equipas que têm mais golos sofridos do que golos marcados, ordenadas alfabeticamente");
-        System.out.println("9-Listar o primeiro classificado de cada grupo");
-        System.out.println("10-Listar informação completa de uma equipa insira o número de golos");
-        System.out.println("11-Criar um ficheiro de texto (Statistics.txt) com estatísticas dos jogos");
-        System.out.println("12-Remover da memória as equipas que não vão disputar a fase seguinte");
-        System.out.println("13-Criar um ficheiro de texto (FinalStage.csv) com as equipas que vão disputar a fase seguinte do campeonato");
-        System.out.println("14-Criar um ficheiro de texto (FinalStageGames.txt) com os jogos da fase final. ");
-        System.out.println("15-Sair");
+        System.out.println("|=================================================MENU========================================================|");
+        System.out.println("|Insira a opção a executar:                                                                                   |");
+        System.out.println("|1-Ler a informação disponível no ficheiro de texto e armazená-la em memória                                  |");
+        System.out.println("|2-Inserir manualmente informação de uma seleção (Exemplo: B,Portugal,3,1,2,0,5,4)                            |");
+        System.out.println("|3-Calcular e armazenar em memória a pontuação de todas as equipas.                                           |");
+        System.out.println("|4-Calcular e armazenar em memória a classificação de todas as equipas nos respetivos grupos.                 |");
+        System.out.println("|5-Listar a classificação das equipas por grupo;                                                              |");
+        System.out.println("|6-Listar as equipas cujos golos marcados é igual ao máximo de golos marcados                                 |");
+        System.out.println("|7-Listar as equipas com um determinado número de golos sofridos. Insira o número de golos                    |");
+        System.out.println("|8-Listar as equipas que têm mais golos sofridos do que golos marcados, ordenadas alfabeticamente             |");
+        System.out.println("|9-Listar o primeiro classificado de cada grupo                                                               |");
+        System.out.println("|10-Listar informação completa de uma equipa insira o número de golos                                         |");
+        System.out.println("|11-Criar um ficheiro de texto (Statistics.txt) com estatísticas dos jogos                                    |");
+        System.out.println("|12-Remover da memória as equipas que não vão disputar a fase seguinte                                        |");
+        System.out.println("|13-Criar um ficheiro de texto (FinalStage.csv) com as equipas que vão disputar a fase seguinte do campeonato |");
+        System.out.println("|14-Criar um ficheiro de texto (FinalStageGames.txt) com os jogos da fase final.                              |");
+        System.out.println("|15-Sair                                                                                                      |");
+        System.out.println("|=============================================================================================================|");
+
     }
     public static int menu(String[][] equipaGrupo,int limite,int[] pontuacao,int M,boolean[] jaLido,int []contGrupo) throws FileNotFoundException{
         
@@ -192,10 +194,11 @@ public class TP {
                 sc2.nextLine();
                 System.out.println("Deseja selecionar outra opção");
                 System.out.println("Selecione 'Y' para confirma");
-                System.out.println("Se selecionar algo diferente de Y o progama irá parar");
+                System.out.println("Se selecionar algo diferente de Y para sair.");
                 String resposta=sc2.nextLine();
-                r=resposta.equals("Y");
+                r= resposta.equals("Y") || resposta.equals("y");
                 if (r){
+                    System.out.println("Digite 1 ou 2");
                     M=sc2.nextInt();
                 }else{
                     break;
@@ -597,7 +600,7 @@ public class TP {
     public static void sofridoGolos (String[][]equipaGrupo,int limite){
         int goloSofr=sc2.nextInt();
         for (int i=0;i<limite;i++){
-            if (goloSofr==Integer.parseInt(equipaGrupo[i][7])){
+            if (goloSofr== Integer.parseInt(equipaGrupo[i][7])){
                 System.out.println(equipaGrupo[i][1]);
             }
         }
