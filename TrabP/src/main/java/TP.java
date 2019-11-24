@@ -544,18 +544,39 @@ public class TP {
     public static void imprimirGrupo (String[][]equipaGrupo,int[]pontuacao,int limite){
         int i1=0;
         String impr="";
+        int maiorString=0;
+        for (int i=0;i<limite;i++){
+            if (equipaGrupo[i][1].length()>maiorString){
+                maiorString=equipaGrupo[i][1].length();
+            }
+        }
+        String espaco="";
+        for (int i=0;i<maiorString-"Seleção".length();i++){
+            espaco=espaco+" ";
+        }
+        System.out.println("|Grupo|Seleção" + espaco + "|J" + "|V" +"|E" +"|D" +"|GM" + "|GL" +"|P|");
         for (int i=0;i<limite;i++){
             
             while (i1<7){
+                espaco="";
                 if (i1==0){
                     impr="";
-                    impr=impr+equipaGrupo[i][i1];
+                    impr="|"+impr+equipaGrupo[i][i1]+"    " +"|";
                 }
                 i1++;
-              impr=impr+","+equipaGrupo[i][i1];
+                for (int i2=0;i2<maiorString-equipaGrupo[i][1].length();i2++){
+                   espaco=espaco+" ";
+                }
+                if(i1!=1){
+                    espaco="";
+                }
+                if (i1==6||i1==7){
+                    espaco=" ";
+                }
+              impr=impr+equipaGrupo[i][i1]+espaco+"|";
               
             }
-            impr=impr+","+pontuacao[i];
+            impr=impr+pontuacao[i]+"|";
             i1=0;
             System.out.println(impr);
         }
