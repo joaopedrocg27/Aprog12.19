@@ -219,6 +219,7 @@ public class TP {
         File file = new File("PracticalWork.csv");
         Scanner sc = new Scanner(file);
         sc.nextLine();
+        //Não lê a primeira linha pois é irrelevante
         int cont=0,i=0;
         //cont é um contador de linhas do ficheiro
         //i indica a linha do ficheiro
