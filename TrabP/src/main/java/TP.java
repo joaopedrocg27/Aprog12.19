@@ -335,11 +335,8 @@ public class TP {
         //int contG=4;
         //int para=0;
         for (int i=0;i<limite;i++){
-            
-             
             switch(equipaGrupo[i][0]){
                 case "A":
-                    
                     sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
                     destinoFinal++;
                     if (destinoFinal==contGrupo[0]){
