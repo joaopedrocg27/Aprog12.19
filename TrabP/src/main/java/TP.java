@@ -637,4 +637,11 @@ public class TP {
             System.out.println(ordenar[i1]);
         }
     }
+    public static void primeiroGrupo(String[][]equipaGrupo,int limite){
+        
+        
+        
+            
+            
+    }            
 }
