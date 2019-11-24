@@ -22,7 +22,7 @@ public class TP {
         System.out.println("14-Criar um ficheiro de texto (FinalStageGames.txt) com os jogos da fase final. ");
         System.out.println("15-Sair");
     }
-    public static int menu(String[][] equipaGrupo,int limite,int[] pontuacao,int M,boolean[] jaLido) throws FileNotFoundException{
+    public static int menu(String[][] equipaGrupo,int limite,int[] pontuacao,int M,boolean[] jaLido,int []contGrupo) throws FileNotFoundException{
         
         
         
@@ -49,7 +49,7 @@ public class TP {
                 jaLido[0]=true;
                 System.out.println("Done");
                 System.out.println(" ");
-                printMenu();                }
+                printMenu();            }
                 break;
             case 3 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
@@ -70,7 +70,7 @@ public class TP {
                 if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
                     System.out.println("");
                 }else{
-                ordenar(equipaGrupo,limite,pontuacao);
+                ordenar(equipaGrupo,limite,pontuacao,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -177,6 +177,7 @@ public class TP {
             //calcularPontuacao(equipaGrupo,limite,pontuacao);
             
             //ordenar(equipaGrupo,limite,pontuacao);
+            int []contGrupo1 = new int[1];
             boolean[] vef= {false};
             printMenu();
             boolean r=true;
@@ -199,11 +200,13 @@ public class TP {
             while (M!=15&&r){
             
             if (M==2||M==1){
-                limite=menu(equipaGrupo,limite,pontuacao1,M,vef);
+                limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo1);
                 int []pontuacao=new int[limite];
+                int []contGrupo=new int[limite];
+                selecPorGrupo(equipaGrupo,limite,contGrupo);
                 M=sc2.nextInt();
                 while (M!=15&&M!=1&&M!=2){
-                    limite=menu(equipaGrupo,limite,pontuacao,M,vef);
+                    limite=menu(equipaGrupo,limite,pontuacao,M,vef,contGrupo);
                     M=sc2.nextInt();
                 }
             }
@@ -283,16 +286,46 @@ public class TP {
 
         return r;
     }
+    public static void selecPorGrupo (String[][]equipaGrupo,int limite,int[]contGrupo){
+        for (int i=0;i<limite;i++){
+            switch (equipaGrupo[i][0]){
+                case "A":
+                    contGrupo[0]++;
+                    break;
+                case "B":
+                    contGrupo[1]++;
+                    break;
+                case "C":
+                    contGrupo[2]++;
+                    break;
+                case "D":
+                    contGrupo[3]++;
+                    break;
+                case "E":
+                    contGrupo[4]++;
+                    break;
+                case "F":
+                    contGrupo[5]++;
+                    break;
+                case "G":
+                    contGrupo[6]++;
+                    break;
+                case "H":
+                    contGrupo[7]++;
+                    break;
+            }
+        }
+    }
     public static void calcularPontuacao(String[][]equipaGrupo,int limite,int [] pontuacao){
         
         for (int i=0;i<limite;i++){
             pontuacao[i]=(Integer.parseInt(equipaGrupo[i][3]))*3+(Integer.parseInt(equipaGrupo[i][4]));
         }
     }
-    public static void ordenar(String[][]equipaGrupo,int limite,int[] pontuacao){
+    public static void ordenar(String[][]equipaGrupo,int limite,int[] pontuacao,int[]contGrupo){
         int destinoFinal=0;
-        int contG=4;
-        int para=0;
+        //int contG=4;
+        //int para=0;
         for (int i=0;i<limite;i++){
             
              
@@ -301,7 +334,7 @@ public class TP {
                     
                     sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
                     destinoFinal++;
-                    if (destinoFinal==4){
+                    if (destinoFinal==contGrupo[0]){
                         i=destinoFinal-1;
                         int classPrim=0;
                         int classUltimo=i;
@@ -309,101 +342,99 @@ public class TP {
                     }
                     break;
                 case "B":
-                    if (destinoFinal>=4){
+                    if (destinoFinal>=contGrupo[0]){
                     sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
                     destinoFinal++;
                     }
-                    if (destinoFinal==8){
+                    if (destinoFinal==contGrupo[0]+contGrupo[1]){
                         i=destinoFinal-1;
-                        int classPrim=4;
+                        int classPrim=contGrupo[0];
                         int classUltimo=i;
                         sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
                     }
                     break;     
                 case "C":
-                    if (destinoFinal>=8){
+                    if (destinoFinal>=contGrupo[0]+contGrupo[1]){
                     sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
                     destinoFinal++;
                     }
-                    if (destinoFinal==12){
+                    if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]){
                         i=destinoFinal-1;
-                        int classPrim=8;
+                        int classPrim=contGrupo[0]+contGrupo[1];
                         int classUltimo=i;
                         sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
                     }
                     break;
                 case "D":
-                    if (destinoFinal>=12){
+                    if (destinoFinal>=contGrupo[0]+contGrupo[1]+contGrupo[2]){
                     sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
                     destinoFinal++;
                     }
-                    if (destinoFinal==16){
+                    if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]){
                         i=destinoFinal-1;
-                        int classPrim=12;
+                        int classPrim=contGrupo[0]+contGrupo[1]+contGrupo[2];
                         int classUltimo=i;
                         sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
                     }
                     break;
                 case "E":
-                    if (destinoFinal>=16){
+                    if (destinoFinal>=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]){
                     sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
                     destinoFinal++;
                     }
-                    if (destinoFinal==20){
+                    if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]){
                         i=destinoFinal-1;
-                        int classPrim=16;
+                        int classPrim=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3];
                         int classUltimo=i;
                         sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
                     }
                     break;
                 case "F":
-                    if (destinoFinal>=20){
+                    if (destinoFinal>=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]){
                     sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
                     destinoFinal++;
                     }
-                    if (destinoFinal==24){
+                    if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]){
                         i=destinoFinal-1;
-                        int classPrim=20;
+                        int classPrim=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4];
                         int classUltimo=i;
                         sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
                     }
                     break;
                 case "G":
-                    if (destinoFinal>=24&&para==1){
+                    if (destinoFinal>=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]){
                     sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
                     destinoFinal++;
                     }
-                    if  (destinoFinal>=24&&para==0){
-                        contG++;
-                    }
-                    if (contG>5){
-                    if (destinoFinal==24+contG-4&&para==1){
+                    if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]+contGrupo[6]){
                         i=destinoFinal-1;
-                        contG -=4;
-                        int classPrim=20+contG;
-                        int classUltimo=i;
-                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
-                    }
-                    }
-                    break;
-                case "H":
-                    if (destinoFinal==contG+24){
-                        int classPrim=limite-(limite-contG-24);
-                        i=limite-1;
+                        int classPrim=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5];
                         int classUltimo=i;
                         sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
                     }
                     
+                    break;
+                case "H":
+                    if (destinoFinal>=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]+contGrupo[6]){
+                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
+                    destinoFinal++;
+                    }
+                    if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]+contGrupo[6]+contGrupo[7]){
+                        i=destinoFinal-1;
+                        int classPrim=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]+contGrupo[6];
+                        int classUltimo=i;
+                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
+                    }
                     
                     break;
             }
-             if (para==0&&i==limite-1){
+             /*if (para==0&&i==limite-1){
                        para=1;
                        if (contG==4){
                        contG -=4;
                        }
                        i=destinoFinal-1;
-                    }      
+                    }*/      
             }
             
         }
