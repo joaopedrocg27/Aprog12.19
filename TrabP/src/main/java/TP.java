@@ -48,15 +48,12 @@ public class TP {
                 if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
                     System.out.println("");
                 }else{
-                limite=lerManualmente (equipaGrupo,limite);
+                limite=lerManualmente (equipaGrupo,limite,contGrupo);
                 jaLido[0]=true;
-                for (int i=0;i<8;i++){
-                    contGrupo[i]=0;
-                }
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
-                selecPorGrupo(equipaGrupo,limite,contGrupo);}
+                }
                 break;
             case 3 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
@@ -237,7 +234,7 @@ public class TP {
         
         return cont;
         }
-    public static int lerManualmente (String[][] equipaGrupo,int limite){
+    public static int lerManualmente (String[][] equipaGrupo,int limite,int[]contGrupo){
         System.out.println("Quer adicionar mais equipas?");
         System.out.println("Se sim,escrever 'Y'");
         sc2.nextLine();
@@ -252,7 +249,10 @@ public class TP {
                     break;
                 }
                 System.out.println("Insira o grupo da equipa");
-                equipaGrupo[i][0]=sc2.nextLine();
+                r=verificarNumSelecGrup(equipaGrupo,limite,contGrupo,i);
+                if (r){
+                    break;
+                }
                 System.out.println("Insira o número de jogos da equipa");
                 equipaGrupo[i][2]=sc2.nextLine();
                 System.out.println("Insira o número de vitórias da equipa");
@@ -323,6 +323,103 @@ public class TP {
                     break;
             }
         }
+    }
+    public static boolean verificarNumSelecGrup(String[][]equipaGrupo,int limite,int[] contGrupo,int i){
+        boolean r=false;
+        String grupo=sc2.nextLine();
+        switch (grupo){
+            case "A":
+                if (contGrupo[0]==4){
+                    r=true;
+                    equipaGrupo[i][1]=null;
+                    System.out.println("Este grupo já tem 4 seleções");
+                    return r;
+                }else{
+                    equipaGrupo[i][0]=grupo;
+                    contGrupo[0]++;
+                }
+                break;
+             case "B":
+                if (contGrupo[1]==4){
+                    r=true;
+                    equipaGrupo[i][1]=null;
+                    System.out.println("Este grupo já tem 4 seleções");
+                    return r;
+                }else{
+                    equipaGrupo[i][0]=grupo;
+                    contGrupo[1]++;
+                }
+                break;
+            case "C":
+                if (contGrupo[2]==4){
+                    r=true;
+                    equipaGrupo[i][1]=null;
+                    System.out.println("Este grupo já tem 4 seleções");
+                    return r;
+                }else{
+                    equipaGrupo[i][0]=grupo;
+                    contGrupo[2]++;
+                }
+                break;
+            case "D":
+                if (contGrupo[3]==4){
+                    r=true;
+                    equipaGrupo[i][1]=null;
+                    System.out.println("Este grupo já tem 4 seleções");
+                    return r;
+                }else{
+                    equipaGrupo[i][0]=grupo;
+                    contGrupo[3]++;
+                }
+                break;
+            case "E":
+                if (contGrupo[4]==4){
+                    r=true;
+                    equipaGrupo[i][1]=null;
+                    System.out.println("Este grupo já tem 4 seleções");
+                    return r;
+                }else{
+                    equipaGrupo[i][0]=grupo;
+                    contGrupo[4]++;
+                }
+                break;
+            case "F":
+                if (contGrupo[5]==4){
+                    r=true;
+                    equipaGrupo[i][1]=null;
+                    System.out.println("Este grupo já tem 4 seleções");
+                    return r;
+                }else{
+                    equipaGrupo[i][0]=grupo;
+                    contGrupo[5]++;
+                }
+                break;
+            case "G":
+                if (contGrupo[6]==4){
+                    r=true;
+                    equipaGrupo[i][1]=null;
+                    System.out.println("Este grupo já tem 4 seleções");
+                    return r;
+                }else{
+                    equipaGrupo[i][0]=grupo;
+                    contGrupo[6]++;
+                }
+                break;
+            case "H":
+                if (contGrupo[7]==4){
+                    r=true;
+                    equipaGrupo[i][1]=null;
+                    System.out.println("Este grupo já tem 4 seleções");
+                    return r;
+                }else{
+                    equipaGrupo[i][0]=grupo;
+                    contGrupo[7]++;
+                }
+                break;
+            default:
+                System.out.println("Grupo Inválido");
+        }
+    return r;
     }
     public static void calcularPontuacao(String[][]equipaGrupo,int limite,int [] pontuacao){
         
