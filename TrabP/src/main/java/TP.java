@@ -38,6 +38,7 @@ public class TP {
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
+                selecPorGrupo(equipaGrupo,limite,contGrupo);
                 break;
             case 2:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
@@ -47,9 +48,13 @@ public class TP {
                 }else{
                 limite=lerManualmente (equipaGrupo,limite);
                 jaLido[0]=true;
+                for (int i=0;i<8;i++){
+                    contGrupo[i]=0;
+                }
                 System.out.println("Done");
                 System.out.println(" ");
-                printMenu();            }
+                printMenu();
+                selecPorGrupo(equipaGrupo,limite,contGrupo);}
                 break;
             case 3 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
@@ -177,12 +182,12 @@ public class TP {
             //calcularPontuacao(equipaGrupo,limite,pontuacao);
             
             //ordenar(equipaGrupo,limite,pontuacao);
-            int []contGrupo1 = new int[1];
+            int []contGrupo = new int[8];
             boolean[] vef= {false};
             printMenu();
             boolean r=true;
             int M=sc2.nextInt();
-            while (M!=1&&M!=2&&M!=2&&M!=15){
+            while (M!=1&&M!=2&&M!=2&&M<15){
                 System.out.println("As opções 1 ou 2 precisam de ser ativadas antes do programa executar");
                 sc2.nextLine();
                 System.out.println("Deseja selecionar outra opção");
@@ -200,10 +205,8 @@ public class TP {
             while (M!=15&&r){
             
             if (M==2||M==1){
-                limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo1);
+                limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo);
                 int []pontuacao=new int[limite];
-                int []contGrupo=new int[limite];
-                selecPorGrupo(equipaGrupo,limite,contGrupo);
                 M=sc2.nextInt();
                 while (M!=15&&M!=1&&M!=2){
                     limite=menu(equipaGrupo,limite,pontuacao,M,vef,contGrupo);
@@ -236,8 +239,8 @@ public class TP {
         System.out.println("Se sim,escrever 'Y'");
         sc2.nextLine();
         String resposta = sc2.nextLine();
-        while (resposta.equals("Y")){
-        for (int i=limite;i<=32;i++){
+        while (resposta.equals("Y")&&limite<32){
+        for (int i=limite;i<32;i++){
             boolean r;
             if (equipaGrupo[i][0]==(null)){
                 System.out.println("Insira o nome da equipa");
@@ -264,9 +267,11 @@ public class TP {
             }
         
         }
+        if (limite<32){
         System.out.println("Quer adicionar mais equipas?");
         System.out.println("Se sim,escrever 'Y'");
         resposta = sc2.nextLine();
+        }
         }
     return limite;   
     }
