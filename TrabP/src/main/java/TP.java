@@ -242,7 +242,7 @@ public class TP {
         System.out.println("Se sim,escrever 'Y'");
         sc2.nextLine();
         String resposta = sc2.nextLine();
-        while (resposta.equals("Y")&&limite<32){
+        while (resposta.equalsIgnoreCase("Y")&&limite<32){
         for (int i=limite;i<32;i++){
             boolean r;
             if (equipaGrupo[i][0]==(null)){
