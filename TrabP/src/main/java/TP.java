@@ -126,7 +126,7 @@ public class TP {
             case 11:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                //missing
+                estatistica (equipaGrupo,limite);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -812,6 +812,11 @@ public class TP {
             vitorias= Integer.parseInt(equipaGrupo[i][3]) + vitorias;
             empates = Integer.parseInt(equipaGrupo[i][4]) + empates;
             derrota= Integer.parseInt(equipaGrupo[i][5]) + derrota;
+            golosM= Integer.parseInt(equipaGrupo[i][6]) + golosM;
+            golosS= Integer.parseInt(equipaGrupo[i][7]) + golosS;
         }
+        mediaGoloM = ((double)golosM)/jogos;
+        mediaGoloS = ((double)golosS)/jogos;
+        
     }
 }
