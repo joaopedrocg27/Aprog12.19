@@ -15,7 +15,7 @@ public class TP {
         System.out.println("|7-Listar as equipas com um determinado número de golos sofridos. Insira o número de golos                    |");
         System.out.println("|8-Listar as equipas que têm mais golos sofridos do que golos marcados, ordenadas alfabeticamente             |");
         System.out.println("|9-Listar o primeiro classificado de cada grupo                                                               |");
-        System.out.println("|10-Listar informação completa de uma equipa insira o número de golos                                         |");
+        System.out.println("|10-Listar informação completa de uma equipa                                       |");
         System.out.println("|11-Criar um ficheiro de texto (Statistics.txt) com estatísticas dos jogos                                    |");
         System.out.println("|12-Remover da memória as equipas que não vão disputar a fase seguinte                                        |");
         System.out.println("|13-Criar um ficheiro de texto (FinalStage.csv) com as equipas que vão disputar a fase seguinte do campeonato |");
@@ -118,7 +118,7 @@ public class TP {
             case 10:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                //missing
+                listarInformacaoSelecao(equipaGrupo,limite,pontuacao,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -731,5 +731,77 @@ public class TP {
             System.out.println(equipaGrupo[aux][1]);
         }
     } 
+    }
+    public static void listarInformacaoSelecao(String[][]equipaGrupo,int limite,int []pontuacao,int[] contGrupo){
+        sc2.nextLine();
+        System.out.println("Introduza a seleção para a qual quer mais informação");
+        String selecao=sc2.nextLine();
+        int contador=0;
+        int soma=0; 
+        for (int i=0;i<limite;i++){
+            if (selecao.equals(equipaGrupo[i][1])){
+                String espaco="";
+                String informacao="";
+                int pos=i+1;
+                if ("selecao".length()>equipaGrupo[i][1].length()){
+                    for (int cont=0;cont<"selecao".length()-equipaGrupo[i][1].length();cont++){
+                        espaco=espaco+" ";
+                    }
+                    while (pos>4){
+                        int i5=0;
+                        
+                        soma=contGrupo[i5]+soma;
+                        pos =i+1-soma;
+                    }
+                    for (int i1=0;i1<8;i1++){
+                        if (i1==0){
+                            informacao="|" + equipaGrupo[i][i1] + "    " + "|" +pos + "º ";
+                        }else{
+                            if (i1==6||i1==7){
+                                informacao=informacao + "|"+equipaGrupo[i][i1] +" ";
+                            }else{
+                                if (i1==1){
+                                    informacao=informacao + "|"+equipaGrupo[i][i1] +espaco;
+                                }else{
+                                informacao=informacao +"|" + equipaGrupo[i][i1];
+                                }
+                            }
+                        }
+                    }
+                    informacao=informacao+ "|" + pontuacao[i] +"|";
+                    System.out.println("|Grupo|Pos|Seleção|J|V|E|D|GM|GF|P|");
+                    System.out.println(informacao);
+                }else{
+                    while (pos>4){
+                        int i5=0; 
+                        soma=contGrupo[i5]+soma;
+                        pos =i+1-soma;
+                    }
+                    informacao="|" + equipaGrupo[i][0] + "    "+ "|" +pos + "º " + "|";
+                    for (int cont=0;cont<equipaGrupo[i][1].length()-"selecao".length();cont++){
+                        espaco=espaco+" ";
+                    }
+                    for (int i1=1;i1<8;i1++){
+                     if (i1!=1){
+                         espaco="";
+                     }   
+                     if (i1==6||i1==7){
+                         espaco=" ";
+                     }
+                     informacao=informacao + equipaGrupo[i][i1] + espaco + "|";
+                    }
+                    
+                    informacao=informacao+ "|" + pontuacao[i] +"|";
+                    System.out.println("|Grupo|Pos|Selecao"+espaco+"|J|V|E|D|GM|GF|P|");
+                    System.out.println(informacao);
+                }
+            
+            }else{
+                contador++;
+            }
+        }
+        if (contador==limite){
+            System.out.println("A seleção não é válida");
+        }
     }
 }
