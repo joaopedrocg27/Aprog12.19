@@ -135,7 +135,7 @@ public class TP {
             case 12:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                //missing
+                limite = limparMemoria (equipaGrupo,limite,contGrupo,pontuacao);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -425,7 +425,8 @@ public class TP {
         int destinoFinal=0;
         //int contG=4;
         //int para=0;
-        for (int i=0;i<limite;i++){
+        for (int i=0;i<32;i++){
+            if (equipaGrupo[i][0] !=null){
             switch(equipaGrupo[i][0]){
                 case "A":
                     sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
@@ -523,6 +524,7 @@ public class TP {
                     }
                     
                     break;
+            }
             }   
             }
             
@@ -820,6 +822,69 @@ public class TP {
         mediaGoloS = ((double)golosS)/jogos;
         printToFile(equipaGrupo,limite,mediaGoloS,mediaGoloM,jogos,vitorias,derrota,golosM,golosS,empates);
         
+    }
+    public static int limparMemoria (String[][]equipaGrupo,int limite,int[] contGrupo,int[] pontuacao){
+        for (int i = 0; i < contGrupo.length; i++) {
+            if (contGrupo[i]<2){
+                switch (i){
+                    case 0:
+                        System.out.println("O grupo A não cumpre o numero mínimo de elementos");
+                        break;
+                    case 1:
+                        System.out.println("O grupo B não cumpre o numero mínimo de elementos");
+                        break;
+                    case 2:
+                        System.out.println("O grupo C não cumpre o numero mínimo de elementos");
+                        break;
+                    case 3:
+                        System.out.println("O grupo D não cumpre o numero mínimo de elementos");
+                        break;
+                    case 4:
+                        System.out.println("O grupo E não cumpre o numero mínimo de elementos");
+                        break;
+                    case 5:
+                        System.out.println("O grupo F não cumpre o numero mínimo de elementos");
+                        break;
+                    case 6:
+                        System.out.println("O grupo G não cumpre o numero mínimo de elementos");
+                        break;
+                    case 7:
+                        System.out.println("O grupo H não cumpre o numero mínimo de elementos");
+                        break;
+
+
+                }
+                break;
+            }    
+            }
+        int soma=0;
+        int i1;
+       for (int i = 0; i < 8; i++) {
+           i1=0;
+           soma=contGrupo[i]+soma;
+           while (i1<8){
+           if (contGrupo[i]==4){
+               equipaGrupo[soma-2][i1]=null;
+               equipaGrupo[soma-1][i1]=null;
+           }else{
+               if (contGrupo[i]==3){
+                   equipaGrupo[soma-1][i1]=null;  
+               }
+                 
+           }
+           i1++;
+           }
+
+        }
+      soma=0;
+        for (int i = 0; i < contGrupo.length; i++) {
+            contGrupo[i]=2;
+            soma=soma + contGrupo[i];
+            
+        }
+       ordenar(equipaGrupo,limite,pontuacao,contGrupo);
+       limite=soma;
+        return limite;
     }
     public static void printToFile(String[][]equipaGrupo,int limite,double mediaGolosS,double mediaGolosM,int jogos,int vitorias,int derrota,int golosM,int golosS,int empates) throws FileNotFoundException{
         PrintWriter out = new PrintWriter(new File("statistics.txt"));
