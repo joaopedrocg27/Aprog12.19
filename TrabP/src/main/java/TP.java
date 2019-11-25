@@ -13,7 +13,7 @@ public class TP {
         System.out.println("|5-Listar a classificação das equipas por grupo;                                                              |");
         System.out.println("|6-Listar as equipas cujos golos marcados é igual ao máximo de golos marcados                                 |");
         System.out.println("|7-Listar as equipas com um determinado número de golos sofridos. Insira o número de golos                    |");
-        System.out.println("|8-Listar as equipas que têm mais golos sofridos do que golos marcados, ordenadas alfabeticamente             |");
+        System.out.println("|8-Listar as equipas que têm /home/guilherme/Aprog12.19mais golos sofridos do que golos marcados, ordenadas alfabeticamente             |");
         System.out.println("|9-Listar o primeiro classificado de cada grupo                                                               |");
         System.out.println("|10-Listar informação completa de uma equipa                                       |");
         System.out.println("|11-Criar um ficheiro de texto (Statistics.txt) com estatísticas dos jogos                                    |");
@@ -802,6 +802,16 @@ public class TP {
         }
         if (contador==limite){
             System.out.println("A seleção não é válida");
+        }
+    }
+    public static void estatistica (String[][]equipaGrupo,int limite){
+        int jogos=0,vitorias=0,empates=0,derrota=0,golosM=0,golosS=0;
+        double mediaGoloM,mediaGoloS;
+        for (int i=0;i<limite;i++){
+            jogos = Integer.parseInt(equipaGrupo[i][2]) + jogos;
+            vitorias= Integer.parseInt(equipaGrupo[i][3]) + vitorias;
+            empates = Integer.parseInt(equipaGrupo[i][4]) + empates;
+            derrota= Integer.parseInt(equipaGrupo[i][5]) + derrota;
         }
     }
 }
