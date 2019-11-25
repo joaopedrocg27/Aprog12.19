@@ -720,16 +720,16 @@ public class TP {
     public static void primeiroGrupo(String[][]equipaGrupo,int limite,int[] pontuacao,int[]contGrupo){
         calcularPontuacao(equipaGrupo,limite,pontuacao);
         ordenar(equipaGrupo,limite,pontuacao,contGrupo);
-        //selecPorGrupo (equipaGrupo,limite,contGrupo);
         int aux=0;
         for(int i=0;i<=7;i++){
-            aux = aux+contGrupo[i];
             if(contGrupo[i]==0){
                 System.out.println("Grupo vazio!");
-                System.out.println(equipaGrupo[aux][1+1]);
             }else{
             System.out.println(equipaGrupo[aux][1]);
-        }
+            }
+            aux = aux+contGrupo[i];
+            
+            
     } 
     }
     public static void listarInformacaoSelecao(String[][]equipaGrupo,int limite,int []pontuacao,int[] contGrupo){
