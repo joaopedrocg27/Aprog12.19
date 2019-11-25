@@ -24,10 +24,7 @@ public class TP {
         System.out.println("|=============================================================================================================|");
 
     }
-    public static int menu(String[][] equipaGrupo,int limite,int[] pontuacao,int M,boolean[] jaLido,int []contGrupo) throws FileNotFoundException{
-        
-        
-        
+    public static int menu(String[][] equipaGrupo,int limite,int[] pontuacao,int M,boolean[] jaLido,int []contGrupo) throws FileNotFoundException{        
         switch (M){
             case 1:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
@@ -113,7 +110,7 @@ public class TP {
             case 9:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                //missing
+                primeiroGrupo(equipaGrupo,limite,pontuacao,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -720,11 +717,19 @@ public class TP {
             System.out.println(ordenar[i1]);
         }
     }
-    public static void primeiroGrupo(String[][]equipaGrupo,int limite){
-        
-        
-        
-            
-            
-    }            
+    public static void primeiroGrupo(String[][]equipaGrupo,int limite,int[] pontuacao,int[]contGrupo){
+        calcularPontuacao(equipaGrupo,limite,pontuacao);
+        ordenar(equipaGrupo,limite,pontuacao,contGrupo);
+        //selecPorGrupo (equipaGrupo,limite,contGrupo);
+        int aux=0;
+        for(int i=0;i<=7;i++){
+            aux = aux+contGrupo[i];
+            if(contGrupo[i]==0){
+                System.out.println("Grupo vazio!");
+                System.out.println(equipaGrupo[aux][1+1]);
+            }else{
+            System.out.println(equipaGrupo[aux][1]);
+        }
+    } 
+    }
 }
