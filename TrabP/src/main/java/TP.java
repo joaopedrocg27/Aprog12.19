@@ -32,10 +32,7 @@ public class TP {
             case 1:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                limite=lerFicheiro(equipaGrupo)+1;
-                if (!jaLido[0]){
-                //limite++;
-                }
+                limite=lerFicheiro(equipaGrupo);
                 jaLido[0]=true;
                 System.out.println("Done");
                 System.out.println(" ");
@@ -99,6 +96,7 @@ public class TP {
             case 7 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                System.out.println("Indicar o numero de golos sofridos");
                 sofridoGolos(equipaGrupo,limite);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -173,18 +171,18 @@ public class TP {
     }
     public static void main (String[] args) throws FileNotFoundException{
             String [][] equipaGrupo = new String [32][8];
+            /*É neste array que fica gravado a informaçao*/
             int limite=0;
-            int i=0;
-           // limite=lerFicheiro(equipaGrupo);
-           //limite++;
+            //Conta o numero de linhas
             int []pontuacao1=new int[1];
-            //calcularPontuacao(equipaGrupo,limite,pontuacao);
-            
-            //ordenar(equipaGrupo,limite,pontuacao);
+            //array provisorio para depois ser substituido por pontuacao
             int []contGrupo = new int[8];
+            //Conta a quantidade de seleções por grupo
             boolean[] vef= {false};
+            //Permite saber se uma opção já foi selecionada
             printMenu();
             boolean r=true;
+            //Se for verdade permite que o menu funcione
             int M=sc2.nextInt();
             while (M!=1&&M!=2&&M!=2&&M<15){
                 System.out.println("As opções 1 ou 2 precisam de ser ativadas antes do programa executar");
@@ -221,17 +219,15 @@ public class TP {
         File file = new File("PracticalWork.csv");
         Scanner sc = new Scanner(file);
         sc.nextLine();
+        //Não lê a primeira linha pois é irrelevante
         int cont=0,i=0;
-        while (sc.hasNextLine()){
-            while (i<=cont){
-               equipaGrupo[i] = sc.nextLine().split(",");
-                i++;
-            }
+        //cont é um contador de linhas do ficheiro
+        //i indica a linha do ficheiro
+        while (sc.hasNextLine()){ 
+            equipaGrupo[i] = sc.nextLine().split(",");
+            i++;
             cont++;
-            
         }
-        cont--;
-        
         return cont;
         }
     public static int lerManualmente (String[][] equipaGrupo,int limite,int[]contGrupo){
@@ -529,14 +525,7 @@ public class TP {
                     }
                     
                     break;
-            }
-             /*if (para==0&&i==limite-1){
-                       para=1;
-                       if (contG==4){
-                       contG -=4;
-                       }
-                       i=destinoFinal-1;
-                    }*/      
+            }   
             }
             
         }
