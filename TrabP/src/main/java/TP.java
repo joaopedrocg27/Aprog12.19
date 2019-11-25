@@ -279,7 +279,7 @@ public class TP {
     return limite;   
     }
     public static boolean verificarRepetição(String[][]equipaGrupo,int i1,int limite){
-        String resposta=sc2.nextLine();
+       String resposta=sc2.nextLine();
        boolean r=false;
         for (int i=0;i<limite;i++){
            r= resposta.equals(equipaGrupo[i][1]);
