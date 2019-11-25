@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 public class TP {
     static Scanner sc2 = new Scanner (System.in);
@@ -804,7 +805,7 @@ public class TP {
             System.out.println("A seleção não é válida");
         }
     }
-    public static void estatistica (String[][]equipaGrupo,int limite){
+    public static void estatistica (String[][]equipaGrupo,int limite) throws FileNotFoundException{
         int jogos=0,vitorias=0,empates=0,derrota=0,golosM=0,golosS=0;
         double mediaGoloM,mediaGoloS;
         for (int i=0;i<limite;i++){
@@ -817,6 +818,19 @@ public class TP {
         }
         mediaGoloM = ((double)golosM)/jogos;
         mediaGoloS = ((double)golosS)/jogos;
+        printToFile(equipaGrupo,limite,mediaGoloS,mediaGoloM,jogos,vitorias,derrota,golosM,golosS,empates);
         
     }
+    public static void printToFile(String[][]equipaGrupo,int limite,double mediaGolosS,double mediaGolosM,int jogos,int vitorias,int derrota,int golosM,int golosS,int empates) throws FileNotFoundException{
+        PrintWriter out = new PrintWriter(new File("statistics.txt"));
+        out.println("Total de jogos="+jogos);
+        out.println("Total de vitórias="+vitorias);
+        out.println("Total de empates="+empates);
+        out.println("Total de derrotas="+derrota);
+        out.println("Total de golos marcados="+golosM);
+        out.println("Total de golos sofridos="+golosS);
+        out.printf("%s%.1f%n","Média de golos marcados por jogo=",mediaGolosM);
+        out.printf("%s%.1f%n","Média de golos sofridos por jogo=",mediaGolosS);
+        out.close();
+    } 
 }
