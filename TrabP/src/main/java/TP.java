@@ -25,7 +25,7 @@ public class TP {
         System.out.println("|=============================================================================================================|");
 
     }
-    public static int menu(String[][] equipaGrupo,int limite,int[] pontuacao,int M,boolean[] jaLido,int []contGrupo) throws FileNotFoundException{        
+    public static int menu(String[][] equipaGrupo,int limite,int[][] pontuacaoDg,int M,boolean[] jaLido,int []contGrupo) throws FileNotFoundException{        
         switch (M){
             case 1:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
@@ -57,7 +57,7 @@ public class TP {
                     System.out.println("");
                 }else{
                     
-                calcularPontuacao(equipaGrupo,limite,pontuacao);    
+                calcularPontuacao(equipaGrupo,limite,pontuacaoDg);    
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -69,7 +69,7 @@ public class TP {
                 if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
                     System.out.println("");
                 }else{
-                ordenar(equipaGrupo,limite,pontuacao,contGrupo);
+                ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -78,7 +78,7 @@ public class TP {
             case 5 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                imprimirGrupo(equipaGrupo,pontuacao,limite);
+                imprimirGrupo(equipaGrupo,pontuacaoDg,limite);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -111,7 +111,7 @@ public class TP {
             case 9:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                primeiroGrupo(equipaGrupo,limite,pontuacao,contGrupo);
+                primeiroGrupo(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -119,7 +119,7 @@ public class TP {
             case 10:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                listarInformacaoSelecao(equipaGrupo,limite,pontuacao,contGrupo);
+                listarInformacaoSelecao(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -135,7 +135,7 @@ public class TP {
             case 12:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                limite = limparMemoria (equipaGrupo,limite,contGrupo,pontuacao);
+                limite = limparMemoria (equipaGrupo,limite,contGrupo,pontuacaoDg);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -143,7 +143,7 @@ public class TP {
             case 13:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                printToFile2(equipaGrupo,contGrupo,limite);
+                //missing
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -172,7 +172,7 @@ public class TP {
             /*É neste array que fica gravado a informaçao*/
             int limite=0;
             //Conta o numero de linhas
-            int []pontuacao1=new int[1];
+            int [][]pontuacao1=new int[1][1];
             //array provisorio para depois ser substituido por pontuacao
             int []contGrupo = new int[8];
             //Conta a quantidade de seleções por grupo
@@ -202,10 +202,10 @@ public class TP {
             
             if (M==2||M==1){
                 limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo);
-                int []pontuacao=new int[limite];
+                int [][]pontuacaoDg=new int[limite][2];
                 M=sc2.nextInt();
                 while (M!=15&&M!=1&&M!=2){
-                    limite=menu(equipaGrupo,limite,pontuacao,M,vef,contGrupo);
+                    limite=menu(equipaGrupo,limite,pontuacaoDg,M,vef,contGrupo);
                     M=sc2.nextInt();
                 }
             }
@@ -415,13 +415,14 @@ public class TP {
         }
     return r;
     }
-    public static void calcularPontuacao(String[][]equipaGrupo,int limite,int [] pontuacao){
+    public static void calcularPontuacao(String[][]equipaGrupo,int limite,int [][] pontuacaoDg){
         
         for (int i=0;i<limite;i++){
-            pontuacao[i]=(Integer.parseInt(equipaGrupo[i][3]))*3+(Integer.parseInt(equipaGrupo[i][4]));
+            pontuacaoDg[i][0]=(Integer.parseInt(equipaGrupo[i][3]))*3+(Integer.parseInt(equipaGrupo[i][4]));
+            pontuacaoDg[i][1]=Integer.parseInt(equipaGrupo[i][6])-Integer.parseInt(equipaGrupo[i][7]);
         }
     }
-    public static void ordenar(String[][]equipaGrupo,int limite,int[] pontuacao,int[]contGrupo){
+    public static void ordenar(String[][]equipaGrupo,int limite,int[][] pontuacaoDg,int[]contGrupo){
         int destinoFinal=0;
         //int contG=4;
         //int para=0;
@@ -429,98 +430,98 @@ public class TP {
             if (equipaGrupo[i][0] !=null){
             switch(equipaGrupo[i][0]){
                 case "A":
-                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
+                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacaoDg);
                     destinoFinal++;
                     if (destinoFinal==contGrupo[0]){
                         i=destinoFinal-1;
                         int classPrim=0;
                         int classUltimo=i;
-                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
+                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacaoDg,classUltimo);
                     }
                     break;
                 case "B":
                     if (destinoFinal>=contGrupo[0]){
-                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
+                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacaoDg);
                     destinoFinal++;
                     }
                     if (destinoFinal==contGrupo[0]+contGrupo[1]){
                         i=destinoFinal-1;
                         int classPrim=contGrupo[0];
                         int classUltimo=i;
-                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
+                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacaoDg,classUltimo);
                     }
                     break;     
                 case "C":
                     if (destinoFinal>=contGrupo[0]+contGrupo[1]){
-                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
+                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacaoDg);
                     destinoFinal++;
                     }
                     if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]){
                         i=destinoFinal-1;
                         int classPrim=contGrupo[0]+contGrupo[1];
                         int classUltimo=i;
-                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
+                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacaoDg,classUltimo);
                     }
                     break;
                 case "D":
                     if (destinoFinal>=contGrupo[0]+contGrupo[1]+contGrupo[2]){
-                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
+                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacaoDg);
                     destinoFinal++;
                     }
                     if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]){
                         i=destinoFinal-1;
                         int classPrim=contGrupo[0]+contGrupo[1]+contGrupo[2];
                         int classUltimo=i;
-                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
+                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacaoDg,classUltimo);
                     }
                     break;
                 case "E":
                     if (destinoFinal>=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]){
-                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
+                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacaoDg);
                     destinoFinal++;
                     }
                     if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]){
                         i=destinoFinal-1;
                         int classPrim=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3];
                         int classUltimo=i;
-                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
+                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacaoDg,classUltimo);
                     }
                     break;
                 case "F":
                     if (destinoFinal>=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]){
-                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
+                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacaoDg);
                     destinoFinal++;
                     }
                     if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]){
                         i=destinoFinal-1;
                         int classPrim=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4];
                         int classUltimo=i;
-                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
+                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacaoDg,classUltimo);
                     }
                     break;
                 case "G":
                     if (destinoFinal>=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]){
-                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
+                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacaoDg);
                     destinoFinal++;
                     }
                     if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]+contGrupo[6]){
                         i=destinoFinal-1;
                         int classPrim=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5];
                         int classUltimo=i;
-                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
+                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacaoDg,classUltimo);
                     }
                     
                     break;
                 case "H":
                     if (destinoFinal>=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]+contGrupo[6]){
-                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacao);
+                    sortGru(equipaGrupo,destinoFinal,i,limite,pontuacaoDg);
                     destinoFinal++;
                     }
                     if (destinoFinal==contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]+contGrupo[6]+contGrupo[7]){
                         i=destinoFinal-1;
                         int classPrim=contGrupo[0]+contGrupo[1]+contGrupo[2]+contGrupo[3]+contGrupo[4]+contGrupo[5]+contGrupo[6];
                         int classUltimo=i;
-                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacao,classUltimo);
+                        sortBetGru(equipaGrupo,classPrim,i,limite,pontuacaoDg,classUltimo);
                     }
                     
                     break;
@@ -533,7 +534,7 @@ public class TP {
    
     
 
-   public static void sortGru(String[][]equipaGrupo,int i1,int i,int limite,int[] pontuacao){
+   public static void sortGru(String[][]equipaGrupo,int i1,int i,int limite,int[][] pontuacaoDg){
        
        for (int ia = 0; ia < 8; ia++) {
         String temp = equipaGrupo[i][ia];
@@ -541,31 +542,34 @@ public class TP {
         equipaGrupo [i1][ia] = temp;
         
        }
-       int ponttemp = pontuacao[i];
-        pontuacao[i]=pontuacao[i1];
-        pontuacao[i1]=ponttemp;
+       int ponttemp = pontuacaoDg[i][0];
+        pontuacaoDg[i][0]=pontuacaoDg[i1][0];
+        pontuacaoDg[i1][0]=ponttemp;
+        int dgTemp = pontuacaoDg[i][1];
+        pontuacaoDg[i][1]=pontuacaoDg[i1][1];
+        pontuacaoDg[i1][1]=ponttemp; 
        
    }
-   public static void sortBetGru(String[][]equipaGrupo,int classPrim,int i,int limite,int[] pontuacao,int classUltimo){
+   public static void sortBetGru(String[][]equipaGrupo,int classPrim,int i,int limite,int[][] pontuacaoDg,int classUltimo){
        int i2=classPrim;
        boolean r=true;
        
        while (r){
        for (i=classPrim;i<classUltimo;i++){
-           if (pontuacao[i]<pontuacao[i+1]){
-               sortGru(equipaGrupo,i2+1,i,limite,pontuacao);
+           if (pontuacaoDg[i][0]<pontuacaoDg[i+1][0]){
+               sortGru(equipaGrupo,i2+1,i,limite,pontuacaoDg);
            }else{
-               if (pontuacao[i]==pontuacao[i+1]){
+               if (pontuacaoDg[i]==pontuacaoDg[i+1]){
                    if (Integer.parseInt(equipaGrupo[i][6])<Integer.parseInt(equipaGrupo[i+1][6])){
-                       sortGru(equipaGrupo,i2+1,i,limite,pontuacao);
+                       sortGru(equipaGrupo,i2+1,i,limite,pontuacaoDg);
                    }else{
                        if (Integer.parseInt(equipaGrupo[i][6])==Integer.parseInt(equipaGrupo[i+1][6])){
                             if (Integer.parseInt(equipaGrupo[i][7])>Integer.parseInt(equipaGrupo[i+1][7])){
-                                sortGru(equipaGrupo,i2+1,i,limite,pontuacao);
+                                sortGru(equipaGrupo,i2+1,i,limite,pontuacaoDg);
                             }else{
                                     if (Integer.parseInt(equipaGrupo[i][7])==Integer.parseInt(equipaGrupo[i+1][7])){
                                         if (equipaGrupo[i][1].compareTo(equipaGrupo[i+1][1])>0){
-                                            sortGru(equipaGrupo,i2+1,i,limite,pontuacao);
+                                            sortGru(equipaGrupo,i2+1,i,limite,pontuacaoDg);
                                         }
 
                         }
@@ -576,7 +580,7 @@ public class TP {
                
            }
            if (i>classPrim){
-           r=check1(pontuacao,equipaGrupo,i);
+           r=check1(pontuacaoDg,equipaGrupo,i);
            
           
                if (r){
@@ -597,15 +601,15 @@ public class TP {
    
    
    
-    public static boolean check1 (int[] generico,String[][]equipaGrupo,int i){
+    public static boolean check1 (int[][] pontuacaoDg,String[][]equipaGrupo,int i){
        boolean r;
        i=i-1;
-       r= generico[i]<generico[i+1];
+       r= pontuacaoDg[i][0]<pontuacaoDg[i+1][0];
         if (r){
             return r;
                 
             }else{
-            if (generico[i]==generico[i+1]){
+            if (pontuacaoDg[i][0]==pontuacaoDg[i+1][0]){
                 r = Integer.parseInt(equipaGrupo[i][6])<Integer.parseInt(equipaGrupo[i+1][6]);
                 if (r){
                     return r;
@@ -627,44 +631,39 @@ public class TP {
         }
     return r;
     }
-    public static void imprimirGrupo (String[][]equipaGrupo,int[]pontuacao,int limite){
+    public static void imprimirGrupo (String[][]equipaGrupo,int[][]pontuacaoDg,int limite){
         int i1=0;
         String impr="";
-        int maiorString=0;
-        for (int i=0;i<limite;i++){
-            if (equipaGrupo[i][1].length()>maiorString){
-                maiorString=equipaGrupo[i][1].length();
-            }
-        }
+        int soma=0;
+        int pos;
         String espaco="";
-        for (int i=0;i<maiorString-"Seleção".length();i++){
-            espaco=espaco+" ";
-        }
-        System.out.println("|Grupo|Seleção" + espaco + "|J" + "|V" +"|E" +"|D" +"|GM" + "|GL" +"|P|");
+        
+        System.out.println("| Grp | Pos | Equipa          | Pts| J  | E  | D  | GM | GS | GD | GD |");
+        System.out.println("|=====|=====|=================|====|====|====|====|====|====|====|====|");
         for (int i=0;i<limite;i++){
-            
-            while (i1<7){
-                espaco="";
-                if (i1==0){
-                    impr="";
-                    impr="|"+impr+equipaGrupo[i][i1]+"    " +"|";
+           while (i1<=8){
+            if (i1==0){
+               pos = i+1-soma;
+               impr="|"+equipaGrupo[i][0]+"    " + "|" +"    "+ pos+"|";
+              }
+            if (i1==1){
+                for (int esp=0;esp<17-equipaGrupo[i][1].length();esp++){
+                    espaco=espaco+ " ";
                 }
-                i1++;
-                for (int i2=0;i2<maiorString-equipaGrupo[i][1].length();i2++){
-                   espaco=espaco+" ";
-                }
-                if(i1!=1){
-                    espaco="";
-                }
-                if (i1==6||i1==7){
-                    espaco=" ";
-                }
-              impr=impr+equipaGrupo[i][i1]+espaco+"|";
-              
+                impr=impr+equipaGrupo[i][1]+espaco+"|";
             }
-            impr=impr+pontuacao[i]+"|";
-            i1=0;
-            System.out.println(impr);
+            if (i1==2){
+                impr=impr+"   "+pontuacaoDg[i][0]+"|";
+            }
+            if (i1==8){
+                impr=impr+"   "+pontuacaoDg[i][1]+"|";
+            if (i1>2&&i1<8){
+                impr=impr+"   "+equipaGrupo[i][i1]+"|";
+            }
+            i1++;
+           } 
+           
+           }
         }
     }
     public static void maximoGolos (String[][]equipaGrupo,int limite){
@@ -720,9 +719,9 @@ public class TP {
             System.out.println(ordenar[i1]);
         }
     }
-    public static void primeiroGrupo(String[][]equipaGrupo,int limite,int[] pontuacao,int[]contGrupo){
-        calcularPontuacao(equipaGrupo,limite,pontuacao);
-        ordenar(equipaGrupo,limite,pontuacao,contGrupo);
+    public static void primeiroGrupo(String[][]equipaGrupo,int limite,int[][] pontuacaoDg,int[]contGrupo){
+        calcularPontuacao(equipaGrupo,limite,pontuacaoDg);
+        ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
         int aux=0;
         for(int i=0;i<=7;i++){
             if(contGrupo[i]==0){
@@ -735,7 +734,7 @@ public class TP {
             
     } 
     }
-    public static void listarInformacaoSelecao(String[][]equipaGrupo,int limite,int []pontuacao,int[] contGrupo){
+    public static void listarInformacaoSelecao(String[][]equipaGrupo,int limite,int [][]pontuacaoDg,int[] contGrupo){
         sc2.nextLine();
         System.out.println("Introduza a seleção para a qual quer mais informação");
         String selecao=sc2.nextLine();
@@ -771,7 +770,7 @@ public class TP {
                             }
                         }
                     }
-                    informacao=informacao+ "|" + pontuacao[i] +"|";
+                    informacao=informacao+ "|" + pontuacaoDg[i][0] +"|";
                     System.out.println("|Grupo|Pos|Seleção|J|V|E|D|GM|GF|P|");
                     System.out.println(informacao);
                 }else{
@@ -794,7 +793,7 @@ public class TP {
                      informacao=informacao + equipaGrupo[i][i1] + espaco + "|";
                     }
                     
-                    informacao=informacao+ "|" + pontuacao[i] +"|";
+                    informacao=informacao+ "|" + pontuacaoDg[i][0] +"|";
                     System.out.println("|Grupo|Pos|Selecao"+espaco+"|J|V|E|D|GM|GF|P|");
                     System.out.println(informacao);
                 }
@@ -823,43 +822,54 @@ public class TP {
         printToFile(equipaGrupo,limite,mediaGoloS,mediaGoloM,jogos,vitorias,derrota,golosM,golosS,empates);
         
     }
-    public static int limparMemoria (String[][]equipaGrupo,int limite,int[] contGrupo,int[] pontuacao){
+    public static int limparMemoria (String[][]equipaGrupo,int limite,int[] contGrupo,int[][] pontuacaoDg){
+       boolean r=false;
         for (int i = 0; i < contGrupo.length; i++) {
             if (contGrupo[i]<2){
                 switch (i){
                     case 0:
                         System.out.println("O grupo A não cumpre o numero mínimo de elementos");
+                        r=true;
                         break;
                     case 1:
                         System.out.println("O grupo B não cumpre o numero mínimo de elementos");
+                        r=true;
                         break;
                     case 2:
                         System.out.println("O grupo C não cumpre o numero mínimo de elementos");
+                        r=true;
                         break;
                     case 3:
                         System.out.println("O grupo D não cumpre o numero mínimo de elementos");
+                        r=true;
                         break;
                     case 4:
                         System.out.println("O grupo E não cumpre o numero mínimo de elementos");
+                        r=true;
                         break;
                     case 5:
                         System.out.println("O grupo F não cumpre o numero mínimo de elementos");
+                        r=true;
                         break;
                     case 6:
                         System.out.println("O grupo G não cumpre o numero mínimo de elementos");
+                        r=true;
                         break;
                     case 7:
                         System.out.println("O grupo H não cumpre o numero mínimo de elementos");
+                        r=true;
                         break;
 
 
                 }
-                break;
             }    
             }
         int soma=0;
         int i1;
        for (int i = 0; i < 8; i++) {
+           if (r){
+               break;
+           }
            i1=0;
            soma=contGrupo[i]+soma;
            while (i1<8){
@@ -882,8 +892,10 @@ public class TP {
             soma=soma + contGrupo[i];
             
         }
-       ordenar(equipaGrupo,limite,pontuacao,contGrupo);
-       limite=soma;
+       ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
+       if (!r){
+               limite=soma;
+       } 
         return limite;
     }
     public static void printToFile(String[][]equipaGrupo,int limite,double mediaGolosS,double mediaGolosM,int jogos,int vitorias,int derrota,int golosM,int golosS,int empates) throws FileNotFoundException{
@@ -898,13 +910,4 @@ public class TP {
         out.printf("%s%.1f%n","Média de golos sofridos por jogo=",mediaGolosS);
         out.close();
     } 
-    public static void printToFile2(String[][]equipaGrupo,int contGrupo[],int limite) throws FileNotFoundException{
-        PrintWriter out2 = new PrintWriter(new File("FinalStage.csv"));
-        for (int i = 0; i <=limite; i++) {
-        out2.println(equipaGrupo[i][0]+",");
-        }
-        //for (int i = 0; i <=limite; i++) {
-         //   int i = contGrupo[i];            
-        }
-    
 }
