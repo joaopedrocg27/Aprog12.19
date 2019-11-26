@@ -143,7 +143,7 @@ public class TP {
             case 13:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                //missing
+                printToFile2(equipaGrupo,contGrupo,limite);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -898,4 +898,13 @@ public class TP {
         out.printf("%s%.1f%n","Média de golos sofridos por jogo=",mediaGolosS);
         out.close();
     } 
+    public static void printToFile2(String[][]equipaGrupo,int contGrupo[],int limite) throws FileNotFoundException{
+        PrintWriter out2 = new PrintWriter(new File("FinalStage.csv"));
+        for (int i = 0; i <=limite; i++) {
+        out2.println(equipaGrupo[i][0]+",");
+        }
+        //for (int i = 0; i <=limite; i++) {
+         //   int i = contGrupo[i];            
+        }
+    
 }
