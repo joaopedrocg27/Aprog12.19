@@ -78,7 +78,7 @@ public class TP {
             case 5 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                imprimirGrupo(equipaGrupo,pontuacaoDg,limite);
+                imprimirGrupo(equipaGrupo,pontuacaoDg,limite,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -632,16 +632,22 @@ public class TP {
         }
     return r;
     }
-    public static void imprimirGrupo (String[][]equipaGrupo,int[][]pontuacaoDg,int limite){
-        int i1=0;
+    public static void imprimirGrupo (String[][]equipaGrupo,int[][]pontuacaoDg,int limite,int[]contGrupo){
+        int i1;
         String impr="";
         int soma=0;
         int pos;
-        String espaco="";
+        int i2;
+        int conti=0;
+        int cont=0;
+        String espaco;
         
-        System.out.println("| Grp | Pos | Equipa          | Pts| J  | E  | D  | GM | GS | GD | GD |");
+        System.out.println("| Grp | Pos | Equipa          | Pts| V  | J  | E  | D  | GM | GS | GD |");
         System.out.println("|=====|=====|=================|====|====|====|====|====|====|====|====|");
         for (int i=0;i<limite;i++){
+            i1=0;
+            i2=2;
+            espaco="";
            while (i1<=8){
             if (i1==0){
                pos = i+1-soma;
@@ -657,15 +663,24 @@ public class TP {
                 impr=impr+"   "+pontuacaoDg[i][0]+"|";
             }
             if (i1==8){
-                impr=impr+"   "+pontuacaoDg[i][1]+"|";
+                impr=impr+"   "+pontuacaoDg[i][1]+"|";}
             if (i1>2&&i1<8){
-                impr=impr+"   "+equipaGrupo[i][i1]+"|";
+                impr=impr+"   "+equipaGrupo[i][i2]+"|";
+                i2++;
             }
             i1++;
-           } 
-           
            }
+           System.out.println(impr);
+        if (cont==contGrupo[conti]-1){
+            cont=0;
+            soma=soma+contGrupo[conti];
+            conti++;
+            
+        }else{
+            cont++;
         }
+        }
+        
     }
     public static void maximoGolos (String[][]equipaGrupo,int limite){
         int max=0;
