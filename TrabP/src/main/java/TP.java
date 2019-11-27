@@ -32,7 +32,6 @@ public class TP {
                 System.out.println(" ");
                 limite=lerFicheiro(equipaGrupo);
                 jaLido[0]=true;
-                jaLido[1]=true;
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -53,21 +52,25 @@ public class TP {
                     System.out.println("A execução deste programa irá reinicar o que foi feito no ponto 4");
                     System.out.println("");
                 }
-                if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro ainda não lido (opção 1)");
-                    System.out.println("");
+                if(!jaLido[0]){
+                    System.out.println("ATENÇÃO! Ficheiro ainda não lido (opção 1)");
+                }
+                System.out.println("");
                 limite=lerManualmente (equipaGrupo,limite,contGrupo);
-                jaLido[0]=true;
                 jaLido[1]=true;
                 jaLido[2]=false;
                 jaLido[3]=false;
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
-                }
                 break;
             case 3 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
                 calcularPontuacao(equipaGrupo,limite,pontuacaoDg);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -78,6 +81,14 @@ public class TP {
             case 4 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
+                if (!jaLido[2]){
+                    System.out.println("Execute Opção 3");
+                    break;
+                }
                 ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -87,15 +98,30 @@ public class TP {
             case 5 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
+                if (!jaLido[2]){
+                    System.out.println("Execute a Opção 3");
+                    break;
+                }
+                if (!jaLido[3]){
+                    System.out.println("Execute a Opção 4");
+                    break;
+                }
                 imprimirGrupo(equipaGrupo,pontuacaoDg,limite,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
-                jaLido[4]=true;
                 break;
             case 6 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
                 maximoGolos(equipaGrupo,limite);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -104,6 +130,10 @@ public class TP {
             case 7 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
                 System.out.println("Indicar o numero de golos sofridos");
                 sofridoGolos(equipaGrupo,limite);
                 System.out.println("Done");
@@ -113,6 +143,14 @@ public class TP {
             case 8:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
+                if (!jaLido[2]){
+                    System.out.println("Execute a Opção 3");
+                    break;
+                }
                 ordenarDiferencaGolos(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -122,24 +160,50 @@ public class TP {
             case 9:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
+                if (!jaLido[2]){
+                    System.out.println("Execute a Opção 3");
+                    break;
+                }
+                if (!jaLido[3]){
+                    System.out.println("Execute a Opção 4");
+                    break;
+                }
                 primeiroGrupo(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
-                jaLido[6]=true;
                 break;
             case 10:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
+                if (!jaLido[2]){
+                    System.out.println("Execute a Opção 3");
+                    break;
+                }
+                if (!jaLido[3]){
+                    System.out.println("Execute a Opção 4");
+                    break;
+                }
                 listarInformacaoSelecao(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
-                jaLido[7]=true;
                 break;
             case 11:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
                 estatistica (equipaGrupo,limite);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -148,14 +212,53 @@ public class TP {
             case 12:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                limparMemoria (equipaGrupo,limite,contGrupo,pontuacaoDg);
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
+                if (!jaLido[1]){
+                    System.out.println("Como este ponto requer 2 equipas por grupo,terá de adicionar as restantes");
+                    System.out.println("Execute a Opção 2");
+                    break;
+                }
+                if (!jaLido[2]){
+                    System.out.println("Execute a Opção 3");
+                    break;
+                }
+                if (!jaLido[3]){
+                    System.out.println("Execute a Opção 4");
+                    break;
+                }
+                limite=limparMemoria (equipaGrupo,limite,contGrupo,pontuacaoDg,jaLido);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
+                jaLido[4]=true;
                 break;
             case 13:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
+                if (!jaLido[1]){
+                    System.out.println("Como este ponto requer 2 equipas por grupo,terá de adicionar as restantes");
+                    System.out.println("Execute a Opção2");
+                }
+                if (!jaLido[2]){
+                    System.out.println("Execute a Opção 3");
+                    break;
+                }
+                if (!jaLido[3]){
+                    System.out.println("Execute a Opção 4");
+                    break;
+                }
+                if (!jaLido[4]){
+                    System.out.println("Este módulo requer a execução da opção 12");
+                    System.out.println("Execute a opção12");
+                    break;
+                }
                 printToFile2(equipaGrupo,limite,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -193,25 +296,29 @@ public class TP {
             for (int i = 0; i < vef.length; i++) {
             vef[i]=false;
             }
-            
             //Permite saber se uma opção já foi selecionada
             printMenu();
             //Se for verdade permite que o menu funcione
             int M;
             M=sc2.nextInt();
-            boolean r,r1;
+            while (M!=1&&M!=2){
+                limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo);
+                printMenu();
+                M=sc2.nextInt();
+            }
             while (M!=15){
+            
                 
             
             if (M==2||M==1){
-                limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo);
+                limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo); 
                 int [][]pontuacaoDg=new int[limite][2];
                 M=sc2.nextInt();
                 while (M!=15&&M!=1&&M!=2){
-                    menu(equipaGrupo,limite,pontuacaoDg,M,vef,contGrupo);
+                    limite=menu(equipaGrupo,limite,pontuacaoDg,M,vef,contGrupo);
                     M=sc2.nextInt();
             }
-            }
+    }
             }
     }
     public static int lerFicheiro (String[][] equipaGrupo) throws FileNotFoundException {
@@ -824,42 +931,50 @@ public class TP {
         printToFile(equipaGrupo,limite,mediaGoloS,mediaGoloM,jogos,vitorias,derrota,golosM,golosS,empates);
         
     }
-    public static int limparMemoria (String[][]equipaGrupo,int limite,int[] contGrupo,int[][] pontuacaoDg){
+    public static int limparMemoria (String[][]equipaGrupo,int limite,int[] contGrupo,int[][] pontuacaoDg,boolean[] jaLido){
        boolean r=false;
         for (int i = 0; i < contGrupo.length; i++) {
             if (contGrupo[i]<2){
                 switch (i){
                     case 0:
                         System.out.println("O grupo A não cumpre o numero mínimo de elementos");
+                        jaLido[1]=false;
                         r=true;
                         break;
                     case 1:
                         System.out.println("O grupo B não cumpre o numero mínimo de elementos");
                         r=true;
+                        jaLido[1]=false;
                         break;
                     case 2:
                         System.out.println("O grupo C não cumpre o numero mínimo de elementos");
                         r=true;
+                        jaLido[1]=false;
                         break;
                     case 3:
                         System.out.println("O grupo D não cumpre o numero mínimo de elementos");
                         r=true;
+                        jaLido[1]=false;
                         break;
                     case 4:
                         System.out.println("O grupo E não cumpre o numero mínimo de elementos");
                         r=true;
+                        jaLido[1]=false;
                         break;
                     case 5:
                         System.out.println("O grupo F não cumpre o numero mínimo de elementos");
                         r=true;
+                        jaLido[1]=false;
                         break;
                     case 6:
                         System.out.println("O grupo G não cumpre o numero mínimo de elementos");
                         r=true;
+                        jaLido[1]=false;
                         break;
                     case 7:
                         System.out.println("O grupo H não cumpre o numero mínimo de elementos");
                         r=true;
+                        jaLido[1]=false;
                         break;
 
 
