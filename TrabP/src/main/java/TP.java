@@ -25,7 +25,7 @@ public class TP {
         System.out.println("|=============================================================================================================|");
 
     }
-    public static int menu(String[][] equipaGrupo,int limite,int[][] pontuacaoDg,int M,boolean[] jaLido,int []contGrupo,int[] m) throws FileNotFoundException{        
+    public static int menu(String[][] equipaGrupo,int limite,int[][] pontuacaoDg,int M,boolean[] jaLido,int []contGrupo) throws FileNotFoundException{        
         switch (M){
             case 1:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
@@ -35,9 +35,7 @@ public class TP {
                 jaLido[1]=true;
                 System.out.println("Done");
                 System.out.println(" ");
-                if (m[1]==0){
                 printMenu();
-                }
                 selecPorGrupo(equipaGrupo,limite,contGrupo);
                 break;
             case 2:
@@ -70,35 +68,16 @@ public class TP {
             case 3 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                boolean r=menuControl1(m,jaLido);
-                if (r){
-                    break;
-                }
                 calcularPontuacao(equipaGrupo,limite,pontuacaoDg);
                 System.out.println("Done");
                 System.out.println(" ");
-                if (m[1]==3||m[1]==0){
-                    printMenu();
-                }
+                printMenu();
                 jaLido[2]=true;
                 break;
                 
             case 4 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                r= menuControl1(m,jaLido);
-                if (r){
-                    break;
-                }
-                if (m[1]!=5){
-                int temp=m[1];
-                m[1]=4;
-                r=menuControl2(m,jaLido);
-                if (r){
-                    break;
-                }
-                m[1]=temp;
-                }
                 ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -108,17 +87,6 @@ public class TP {
             case 5 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                r= menuControl1(m,jaLido);
-                if (r){
-                    break;
-                }
-                /*r=menuControl2(m,jaLido);
-                if (r){
-                    break;
-                }else{
-                    m[4]=0;
-                }
-                */
                 imprimirGrupo(equipaGrupo,pontuacaoDg,limite,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -128,10 +96,6 @@ public class TP {
             case 6 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                r=menuControl1(m,jaLido);
-                if (r){
-                    break;
-                }
                 maximoGolos(equipaGrupo,limite);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -140,10 +104,6 @@ public class TP {
             case 7 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                r=menuControl1(m,jaLido);
-                if (r){
-                    break;
-                }
                 System.out.println("Indicar o numero de golos sofridos");
                 sofridoGolos(equipaGrupo,limite);
                 System.out.println("Done");
@@ -153,14 +113,6 @@ public class TP {
             case 8:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                r=menuControl1(m,jaLido);
-                if (r){
-                    break;
-                }
-                r=menuControl2(m,jaLido);
-                if (r){
-                    break;
-                }
                 ordenarDiferencaGolos(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -170,10 +122,6 @@ public class TP {
             case 9:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                r=menuControl1(m,jaLido);
-                if (r){
-                    break;
-                }
                 primeiroGrupo(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -183,10 +131,6 @@ public class TP {
             case 10:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                r=menuControl1(m,jaLido);
-                if (r){
-                    break;
-                }
                 listarInformacaoSelecao(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -204,7 +148,7 @@ public class TP {
             case 12:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                limite = limparMemoria (equipaGrupo,limite,contGrupo,pontuacaoDg);
+                limparMemoria (equipaGrupo,limite,contGrupo,pontuacaoDg);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -236,59 +180,6 @@ public class TP {
         }
         return limite;
     }
-    public static boolean menuFazPouco(String[][] equipaGrupo,int limite,int[][] pontuacaoDg,int M,boolean[] jaLido,int []contGrupo,int[] m) throws FileNotFoundException{        
-        boolean r=true;
-        switch (M){
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3 :
-                m[1]=3;
-                break;
-                
-            case 4 :
-                m[1]=4;
-                    break;
-            case 5 :
-                m[1]=4;
-                m[2]=5;
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                m[1]=4;
-                m[2]=8;
-                break;
-            case 9:
-                m[1]=4;
-                m[2]=9;
-                break;
-            case 10:
-                m[1]=4;
-                m[2]=10;
-                break;
-            case 11:
-                m[1]=9;
-                break;
-            case 12:
-                m[1]=10;
-                break;
-            case 13:
-                m[1]=11;
-                break;
-            case 14:
-                m[1]=12;
-                break;  
-            default:
-                System.out.println("Erro: Opção inválida");
-                r=false;
-                break;
-        }
-        return r;
-    }
     public static void main (String[] args) throws FileNotFoundException{
             String [][] equipaGrupo = new String [32][8];
             /*É neste array que fica gravado a informaçao*/
@@ -306,114 +197,22 @@ public class TP {
             //Permite saber se uma opção já foi selecionada
             printMenu();
             //Se for verdade permite que o menu funcione
-            int[] M=new int[5];
-            M[0]=sc2.nextInt();
-            M[4]=0;
-            
+            int M;
+            M=sc2.nextInt();
             boolean r,r1;
-            while (M[0]!=15){
+            while (M!=15){
                 
             
-            if (M[0]==2||M[0]==1){
-                limite=menu(equipaGrupo,limite,pontuacao1,M[0],vef,contGrupo,M);
+            if (M==2||M==1){
+                limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo);
                 int [][]pontuacaoDg=new int[limite][2];
-                if (M[1]==0){
-                  M[0]=sc2.nextInt();
-                }else{
-                    M[0]=M[1];
-                }
-                while (M[0]!=15&&M[0]!=1&&M[0]!=2){
-                    r1=menuFazPouco(equipaGrupo,limite,pontuacaoDg,M[0],vef,contGrupo,M);
-                    if (M[0]!=6&&M[0]!=7){
-                    r=menuControl3(M,vef);
-                    if (M[2]==5||M[2]==8||M[2]==9||M[2]==10){
-                        M[0]=M[1];
-                        }
-                    while (r&&r1){
-                        menu(equipaGrupo,limite,pontuacaoDg,M[0],vef,contGrupo,M);
-                        r=menuControl3(M,vef);
-                        menuControl2(M,vef);
-                    }
-                    
-                }else{
-                        menu(equipaGrupo,limite,pontuacaoDg,M[0],vef,contGrupo,M);
-                    }
-                    if (M[2]==5||M[2]==8||M[2]==9||M[2]==10){
-                        if (M[2]==8){
-                            M[0]=8;
-                        }else{
-                            if (M[2]==10){
-                                M[0]=10;
-                            }else{
-                                if (M[2]==5){
-                                    M[0]=5;
-                                }else{
-                                    M[0]=9;
-                                }
-                                
-                            }
-                        }
-                        menu(equipaGrupo,limite,pontuacaoDg,M[0],vef,contGrupo,M);
-                    }
-                    M[1]=0;
-                    M[0]=sc2.nextInt();
-             }
-                
-                    
-            }else{
-                menu(equipaGrupo,limite,pontuacao1,M[0],vef,contGrupo,M);
+                M=sc2.nextInt();
+                while (M!=15&&M!=1&&M!=2){
+                    menu(equipaGrupo,limite,pontuacaoDg,M,vef,contGrupo);
+                    M=sc2.nextInt();
             }
-            
             }
-    }
-    public static boolean menuControl1(int[]M,boolean [] jaLido){
-       boolean r=!jaLido[0]||!jaLido[1];
-       if(r){
-       System.out.println("Como o ficheiro ainda não foi lido, a opção 1 será inicializada");
-       System.out.println("");
-       M[1]=M[0];
-       M[0]=1;
-      }
-        return r;
-    }
-    public static boolean menuControl2(int[]M,boolean [] jaLido){
-    boolean r=false;
-        for (int i=0;i<=M[1]-3;i++){
-            if (i!=M[1]-3){
-        if (!jaLido[2+i]){
-            r=true;
-            M[0]=3+i;
-            M[4]++;
-            break;
-        }
-       }else{
-                if (!jaLido[2+i]){
-                    r=false;
-                     M[0]=M[1];
-                    break;
-                }
             }
-     }    
-    return r;
-    }
-    public static boolean menuControl3(int[]M,boolean [] jaLido){
-    boolean r=false;
-        for (int i=0;i<=M[1]-3;i++){
-        if (i!=M[1]-3){
-        if (!jaLido[2+i]){
-            r=true;
-            break;
-       }
-        }else{
-                if (!jaLido[2+i]){
-                    r=true;
-                    break;
-                }else{
-                    r=false;
-                }
-            }
-     }    
-    return r;
     }
     public static int lerFicheiro (String[][] equipaGrupo) throws FileNotFoundException {
         File file = new File("PracticalWork.csv");
@@ -733,11 +532,7 @@ public class TP {
             }
             
         }
-            
-   
-    
-
-   public static void sortGru(String[][]equipaGrupo,int i1,int i,int limite,int[][] pontuacaoDg){
+    public static void sortGru(String[][]equipaGrupo,int i1,int i,int limite,int[][] pontuacaoDg){
        
        for (int ia = 0; ia < 8; ia++) {
         String temp = equipaGrupo[i][ia];
@@ -753,7 +548,7 @@ public class TP {
         pontuacaoDg[i1][1]=dgTemp; 
        
    }
-   public static void sortBetGru(String[][]equipaGrupo,int classPrim,int i,int limite,int[][] pontuacaoDg,int classUltimo){
+    public static void sortBetGru(String[][]equipaGrupo,int classPrim,int i,int limite,int[][] pontuacaoDg,int classUltimo){
        int i2=classPrim;
        boolean r=true;
        
@@ -801,9 +596,6 @@ public class TP {
        }
        
        }
-   
-   
-   
     public static boolean check1 (int[][] pontuacaoDg,String[][]equipaGrupo,int i){
        boolean r;
        i=i-1;
