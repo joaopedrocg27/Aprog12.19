@@ -14,7 +14,7 @@ public class TP {
         System.out.println("|5-Listar a classificação das equipas por grupo;                                                              |");
         System.out.println("|6-Listar as equipas cujos golos marcados é igual ao máximo de golos marcados                                 |");
         System.out.println("|7-Listar as equipas com um determinado número de golos sofridos. Insira o número de golos                    |");
-        System.out.println("|8-Listar as equipas que têm /home/guilherme/Aprog12.19mais golos sofridos do que golos marcados, ordenadas alfabeticamente             |");
+        System.out.println("|8-Listar as equipas que têm mais golos sofridos do que golos marcados, ordenadas alfabeticamente             |");
         System.out.println("|9-Listar o primeiro classificado de cada grupo                                                               |");
         System.out.println("|10-Listar informação completa de uma equipa                                       |");
         System.out.println("|11-Criar um ficheiro de texto (Statistics.txt) com estatísticas dos jogos                                    |");
@@ -25,26 +25,43 @@ public class TP {
         System.out.println("|=============================================================================================================|");
 
     }
-    public static int menu(String[][] equipaGrupo,int limite,int[][] pontuacaoDg,int M,boolean[] jaLido,int []contGrupo) throws FileNotFoundException{        
+    public static int menu(String[][] equipaGrupo,int limite,int[][] pontuacaoDg,int M,boolean[] jaLido,int []contGrupo,int[] m) throws FileNotFoundException{        
         switch (M){
             case 1:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
                 limite=lerFicheiro(equipaGrupo);
                 jaLido[0]=true;
+                jaLido[1]=true;
                 System.out.println("Done");
                 System.out.println(" ");
+                if (m[1]==0){
                 printMenu();
+                }
                 selecPorGrupo(equipaGrupo,limite,contGrupo);
                 break;
             case 2:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
+                if (jaLido[2]&&jaLido[3]){
+                    System.out.println("A execução deste programa irá reinicar o que foi feito no ponto 3 e 4");
                     System.out.println("");
-                }else{
+                }
+                if (jaLido[2]){
+                    System.out.println("A execução deste programa irá reinicar o que foi feito no ponto 3");
+                    System.out.println("");
+                }
+                if (jaLido[3]){
+                    System.out.println("A execução deste programa irá reinicar o que foi feito no ponto 4");
+                    System.out.println("");
+                }
+                if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro ainda não lido (opção 1)");
+                    System.out.println("");
                 limite=lerManualmente (equipaGrupo,limite,contGrupo);
                 jaLido[0]=true;
+                jaLido[1]=true;
+                jaLido[2]=false;
+                jaLido[3]=false;
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -53,39 +70,68 @@ public class TP {
             case 3 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
-                    System.out.println("");
-                }else{
-                    
-                calcularPontuacao(equipaGrupo,limite,pontuacaoDg);    
+                boolean r=menuControl1(m,jaLido);
+                if (r){
+                    break;
+                }
+                calcularPontuacao(equipaGrupo,limite,pontuacaoDg);
                 System.out.println("Done");
                 System.out.println(" ");
-                printMenu();
-                break;
+                if (m[1]==3||m[1]==0){
+                    printMenu();
                 }
+                jaLido[2]=true;
+                break;
+                
             case 4 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                if(!jaLido[0]){System.out.println("ATENÇÃO! Ficheiro inda não lido (opção 1)");
-                    System.out.println("");
-                }else{
+                r= menuControl1(m,jaLido);
+                if (r){
+                    break;
+                }
+                if (m[1]!=5){
+                int temp=m[1];
+                m[1]=4;
+                r=menuControl2(m,jaLido);
+                if (r){
+                    break;
+                }
+                m[1]=temp;
+                }
                 ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
-                }
+                jaLido[3]=true;
                 break;
             case 5 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                r= menuControl1(m,jaLido);
+                if (r){
+                    break;
+                }
+                /*r=menuControl2(m,jaLido);
+                if (r){
+                    break;
+                }else{
+                    m[4]=0;
+                }
+                */
                 imprimirGrupo(equipaGrupo,pontuacaoDg,limite,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
+                jaLido[4]=true;
                 break;
             case 6 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                r=menuControl1(m,jaLido);
+                if (r){
+                    break;
+                }
                 maximoGolos(equipaGrupo,limite);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -94,6 +140,10 @@ public class TP {
             case 7 :
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                r=menuControl1(m,jaLido);
+                if (r){
+                    break;
+                }
                 System.out.println("Indicar o numero de golos sofridos");
                 sofridoGolos(equipaGrupo,limite);
                 System.out.println("Done");
@@ -103,26 +153,45 @@ public class TP {
             case 8:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                ordenarDiferencaGolos(equipaGrupo,limite);
+                r=menuControl1(m,jaLido);
+                if (r){
+                    break;
+                }
+                r=menuControl2(m,jaLido);
+                if (r){
+                    break;
+                }
+                ordenarDiferencaGolos(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
+                jaLido[5]=true;
                 break;
             case 9:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                r=menuControl1(m,jaLido);
+                if (r){
+                    break;
+                }
                 primeiroGrupo(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
+                jaLido[6]=true;
                 break;
             case 10:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                r=menuControl1(m,jaLido);
+                if (r){
+                    break;
+                }
                 listarInformacaoSelecao(equipaGrupo,limite,pontuacaoDg,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
+                jaLido[7]=true;
                 break;
             case 11:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
@@ -167,6 +236,59 @@ public class TP {
         }
         return limite;
     }
+    public static boolean menuFazPouco(String[][] equipaGrupo,int limite,int[][] pontuacaoDg,int M,boolean[] jaLido,int []contGrupo,int[] m) throws FileNotFoundException{        
+        boolean r=true;
+        switch (M){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3 :
+                m[1]=3;
+                break;
+                
+            case 4 :
+                m[1]=4;
+                    break;
+            case 5 :
+                m[1]=4;
+                m[2]=5;
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                m[1]=4;
+                m[2]=8;
+                break;
+            case 9:
+                m[1]=4;
+                m[2]=9;
+                break;
+            case 10:
+                m[1]=4;
+                m[2]=10;
+                break;
+            case 11:
+                m[1]=9;
+                break;
+            case 12:
+                m[1]=10;
+                break;
+            case 13:
+                m[1]=11;
+                break;
+            case 14:
+                m[1]=12;
+                break;  
+            default:
+                System.out.println("Erro: Opção inválida");
+                r=false;
+                break;
+        }
+        return r;
+    }
     public static void main (String[] args) throws FileNotFoundException{
             String [][] equipaGrupo = new String [32][8];
             /*É neste array que fica gravado a informaçao*/
@@ -176,42 +298,122 @@ public class TP {
             //array provisorio para depois ser substituido por pontuacao
             int []contGrupo = new int[8];
             //Conta a quantidade de seleções por grupo
-            boolean[] vef= {false};
+            boolean[] vef= new boolean [13];
+            for (int i = 0; i < vef.length; i++) {
+            vef[i]=false;
+            }
+            
             //Permite saber se uma opção já foi selecionada
             printMenu();
-            boolean r=true;
             //Se for verdade permite que o menu funcione
-            int M=sc2.nextInt();
-            while (M!=1&&M!=2&&M!=2&&M<15){
-                System.out.println("As opções 1 ou 2 precisam de ser ativadas antes do programa executar");
-                sc2.nextLine();
-                System.out.println("Deseja selecionar outra opção");
-                System.out.println("Selecione 'Y' para confirma");
-                System.out.println("Se selecionar algo diferente de Y para sair.");
-                String resposta=sc2.nextLine();
-                r= resposta.equals("Y") || resposta.equals("y");
-                if (r){
-                    System.out.println("Digite 1 ou 2");
-                    M=sc2.nextInt();
+            int[] M=new int[5];
+            M[0]=sc2.nextInt();
+            M[4]=0;
+            
+            boolean r,r1;
+            while (M[0]!=15){
+                
+            
+            if (M[0]==2||M[0]==1){
+                limite=menu(equipaGrupo,limite,pontuacao1,M[0],vef,contGrupo,M);
+                int [][]pontuacaoDg=new int[limite][2];
+                if (M[1]==0){
+                  M[0]=sc2.nextInt();
                 }else{
+                    M[0]=M[1];
+                }
+                while (M[0]!=15&&M[0]!=1&&M[0]!=2){
+                    r1=menuFazPouco(equipaGrupo,limite,pontuacaoDg,M[0],vef,contGrupo,M);
+                    if (M[0]!=6&&M[0]!=7){
+                    r=menuControl3(M,vef);
+                    if (M[2]==5||M[2]==8||M[2]==9||M[2]==10){
+                        M[0]=M[1];
+                        }
+                    while (r&&r1){
+                        menu(equipaGrupo,limite,pontuacaoDg,M[0],vef,contGrupo,M);
+                        r=menuControl3(M,vef);
+                        menuControl2(M,vef);
+                    }
+                    
+                }else{
+                        menu(equipaGrupo,limite,pontuacaoDg,M[0],vef,contGrupo,M);
+                    }
+                    if (M[2]==5||M[2]==8||M[2]==9||M[2]==10){
+                        if (M[2]==8){
+                            M[0]=8;
+                        }else{
+                            if (M[2]==10){
+                                M[0]=10;
+                            }else{
+                                if (M[2]==5){
+                                    M[0]=5;
+                                }else{
+                                    M[0]=9;
+                                }
+                                
+                            }
+                        }
+                        menu(equipaGrupo,limite,pontuacaoDg,M[0],vef,contGrupo,M);
+                    }
+                    M[1]=0;
+                    M[0]=sc2.nextInt();
+             }
+                
+                    
+            }else{
+                menu(equipaGrupo,limite,pontuacao1,M[0],vef,contGrupo,M);
+            }
+            
+            }
+    }
+    public static boolean menuControl1(int[]M,boolean [] jaLido){
+       boolean r=!jaLido[0]||!jaLido[1];
+       if(r){
+       System.out.println("Como o ficheiro ainda não foi lido, a opção 1 será inicializada");
+       System.out.println("");
+       M[1]=M[0];
+       M[0]=1;
+      }
+        return r;
+    }
+    public static boolean menuControl2(int[]M,boolean [] jaLido){
+    boolean r=false;
+        for (int i=0;i<=M[1]-3;i++){
+            if (i!=M[1]-3){
+        if (!jaLido[2+i]){
+            r=true;
+            M[0]=3+i;
+            M[4]++;
+            break;
+        }
+       }else{
+                if (!jaLido[2+i]){
+                    r=false;
+                     M[0]=M[1];
                     break;
                 }
-                
             }
-            while (M!=15&&r){
-            
-            if (M==2||M==1){
-                limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo);
-                int [][]pontuacaoDg=new int[limite][2];
-                M=sc2.nextInt();
-                while (M!=15&&M!=1&&M!=2){
-                    limite=menu(equipaGrupo,limite,pontuacaoDg,M,vef,contGrupo);
-                    M=sc2.nextInt();
+     }    
+    return r;
+    }
+    public static boolean menuControl3(int[]M,boolean [] jaLido){
+    boolean r=false;
+        for (int i=0;i<=M[1]-3;i++){
+        if (i!=M[1]-3){
+        if (!jaLido[2+i]){
+            r=true;
+            break;
+       }
+        }else{
+                if (!jaLido[2+i]){
+                    r=true;
+                    break;
+                }else{
+                    r=false;
                 }
             }
-            
-            }
-            
+     }    
+    return r;
     }
     public static int lerFicheiro (String[][] equipaGrupo) throws FileNotFoundException {
         File file = new File("PracticalWork.csv");
@@ -548,7 +750,7 @@ public class TP {
         pontuacaoDg[i1][0]=ponttemp;
         int dgTemp = pontuacaoDg[i][1];
         pontuacaoDg[i][1]=pontuacaoDg[i1][1];
-        pontuacaoDg[i1][1]=ponttemp; 
+        pontuacaoDg[i1][1]=dgTemp; 
        
    }
    public static void sortBetGru(String[][]equipaGrupo,int classPrim,int i,int limite,int[][] pontuacaoDg,int classUltimo){
@@ -560,7 +762,7 @@ public class TP {
            if (pontuacaoDg[i][0]<pontuacaoDg[i+1][0]){
                sortGru(equipaGrupo,i2+1,i,limite,pontuacaoDg);
            }else{
-               if (pontuacaoDg[i]==pontuacaoDg[i+1]){
+               if (pontuacaoDg[i][0]==pontuacaoDg[i+1][0]){
                    if (Integer.parseInt(equipaGrupo[i][6])<Integer.parseInt(equipaGrupo[i+1][6])){
                        sortGru(equipaGrupo,i2+1,i,limite,pontuacaoDg);
                    }else{
@@ -633,53 +835,59 @@ public class TP {
     return r;
     }
     public static void imprimirGrupo (String[][]equipaGrupo,int[][]pontuacaoDg,int limite,int[]contGrupo){
-        int i1;
-        String impr="";
-        int soma=0;
-        int pos;
-        int i2;
-        int conti=0;
-        int cont=0;
-        String espaco;
-        
+        Imprime1();
+        for (int i=0;i<limite;i++){
+            
+            Imprime2(equipaGrupo,i,contGrupo,pontuacaoDg);
+ 
+        }
+    }
+    public static void Imprime1(){
         System.out.println("| Grp | Pos | Equipa          | Pts| V  | J  | E  | D  | GM | GS | GD |");
         System.out.println("|=====|=====|=================|====|====|====|====|====|====|====|====|");
-        for (int i=0;i<limite;i++){
-            i1=0;
-            i2=2;
-            espaco="";
-           while (i1<=8){
-            if (i1==0){
-               pos = i+1-soma;
-               impr="|"+equipaGrupo[i][0]+"    " + "|" +"    "+ pos+"|";
-              }
-            if (i1==1){
-                for (int esp=0;esp<17-equipaGrupo[i][1].length();esp++){
-                    espaco=espaco+ " ";
+    }
+    public static void Imprime2(String[][]equipaGrupo,int i,int[]contGrupo,int[][] pontuacaoDg){
+                String impr;
+                int pos;
+                int soma=0;
+                int i1=0;
+                String espaco="";
+                do{
+                    pos=i-soma+1;
+                    soma=soma+contGrupo[i1];
+                    i1++;
+                }while(pos>4);
+                impr="|" + equipaGrupo[i][0]+ "    " + "|" + pos + "    " + "|";
+                i1=1;
+                int i2=1;
+                while (i1<=9){
+                    if (i1==1){
+                        for (int espac=0;espac<17-equipaGrupo[i][1].length();espac++){
+                            espaco=espaco+" ";
+                        }
+                        impr=impr + equipaGrupo[i][1]+ espaco + "|";    
+                    }
+                    if (i1==2){
+                        impr=impr + pontuacaoDg[i][0] + "   "+"|";
+                    }
+                    if (i1==9){
+                        if (pontuacaoDg[i][1]>=0){
+                        impr=impr+"   "+pontuacaoDg[i][1]+"|";
+                        }else{
+                        impr=impr+"  "+pontuacaoDg[i][1]+"|";   
+                        }
+                    }
+                    if (i1>2&&i1<9){
+                        i2++;
+                        if (Integer.parseInt(equipaGrupo[i][i2])<10){
+                            impr=impr+"   "+equipaGrupo[i][i2]+"|";
+                        }else{
+                            impr=impr+"  "+equipaGrupo[i][i2]+"|";
+                        }
+                    }
+                    i1++;
                 }
-                impr=impr+equipaGrupo[i][1]+espaco+"|";
-            }
-            if (i1==2){
-                impr=impr+"   "+pontuacaoDg[i][0]+"|";
-            }
-            if (i1==8){
-                impr=impr+"   "+pontuacaoDg[i][1]+"|";}
-            if (i1>2&&i1<8){
-                impr=impr+"   "+equipaGrupo[i][i2]+"|";
-                i2++;
-            }
-            i1++;
-           }
-           System.out.println(impr);
-        if (cont==contGrupo[conti]-1){
-            cont=0;
-            soma=soma+contGrupo[conti];
-            conti++;
-            
-        }else{
-            cont++;
-        }
-        }
+                System.out.println(impr);
         
     }
     public static void maximoGolos (String[][]equipaGrupo,int limite){
@@ -703,47 +911,87 @@ public class TP {
             }
         }
     }
-    public static void ordenarDiferencaGolos (String[][]equipaGrupo,int limite){
+    public static void ordenarDiferencaGolos (String[][]equipaGrupo,int limite,int[][]pontuacaoDg,int[] contGrupo){
         int contEqui=0;
         for (int i=0;i<limite;i++){
-            if (Integer.parseInt(equipaGrupo[i][6])<Integer.parseInt(equipaGrupo[i][7])){
+            if (pontuacaoDg[i][1]<0){
                 contEqui++;
             }
         }
         int i1=0;
         String[]ordenar=new String[contEqui];
+        int[]posicao=new int[contEqui];
         for (int i=0;i<limite;i++){
-            if (Integer.parseInt(equipaGrupo[i][6])<Integer.parseInt(equipaGrupo[i][7])){
+            if (pontuacaoDg[i][1]<0){
                 ordenar[i1]=equipaGrupo[i][1];
+                posicao[i1]=i;
                 i1++;
             }
         }
-        for (i1=0;i1<contEqui-1;i1++){
-            if (ordenar[i1].compareTo(ordenar[i1+1])>0){
-                String temp=ordenar[i1];
-                ordenar[i1]=ordenar[i1+1];
-                ordenar[i1+1]=temp;
-                if (i1>0){
-                boolean r=ordenar[i1].compareTo(ordenar[i1-1])<0;
-                if (r){
-                    i1=i1-2;
+        for (int i = 0; i < ordenar.length-1; i++) {
+            if (ordenar[i].compareTo(ordenar[i+1])>0){
+                String temp=ordenar[i];
+                ordenar[i]=ordenar[i+1];
+                ordenar[i+1]=temp;
+                int posicaoOrdenar=posicao[i];
+                posicao[i]=posicao[i+1];
+                posicao[i+1]=posicaoOrdenar;
+            }
+            if (i>0){
+                if(ordenar[i].compareTo(ordenar[i-1])<0){
+                    i=i-2;
                 }
             }
-            }
         }
-        for (i1=0;i1<contEqui;i1++){
-            System.out.println(ordenar[i1]);
+        Imprime1();
+        for (int i = 0; i < posicao.length; i++) {
+            Imprime2(equipaGrupo,posicao[i],contGrupo,pontuacaoDg);
+            
         }
+        
     }
     public static void primeiroGrupo(String[][]equipaGrupo,int limite,int[][] pontuacaoDg,int[]contGrupo){
-        calcularPontuacao(equipaGrupo,limite,pontuacaoDg);
-        ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
+        //calcularPontuacao(equipaGrupo,limite,pontuacaoDg);
+        //ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
         int aux=0;
+        boolean r=true;
         for(int i=0;i<=7;i++){
             if(contGrupo[i]==0){
-                System.out.println("Grupo vazio!");
+                switch(equipaGrupo[aux][0]){
+                    case "B":
+                        System.out.println("|A    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        break;
+                    case "C":
+                        System.out.println("|B    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        break;
+                    case "D":
+                        System.out.println("|C    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        break;
+                    case "E":
+                        System.out.println("|D    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        break;
+                    case "F":
+                        System.out.println("|E    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        break;
+                    case "G":
+                        System.out.println("|F    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        break;
+                    case "H":
+                        System.out.println("|G    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        break;
+                    default:
+                        System.out.println("|H    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        break;
+                }
+                
             }else{
-            System.out.println(equipaGrupo[aux][1]);
+                if (r){
+                    Imprime1();
+                    r=false;
+                }
+                
+            Imprime2(equipaGrupo,aux,contGrupo,pontuacaoDg);
+                
             }
             aux = aux+contGrupo[i];
             
@@ -754,72 +1002,18 @@ public class TP {
         sc2.nextLine();
         System.out.println("Introduza a seleção para a qual quer mais informação");
         String selecao=sc2.nextLine();
-        int contador=0;
-        int soma=0; 
-        for (int i=0;i<limite;i++){
-            if (selecao.equals(equipaGrupo[i][1])){
-                String espaco="";
-                String informacao="";
-                int pos=i+1;
-                if ("selecao".length()>equipaGrupo[i][1].length()){
-                    for (int cont=0;cont<"selecao".length()-equipaGrupo[i][1].length();cont++){
-                        espaco=espaco+" ";
-                    }
-                    while (pos>4){
-                        int i5=0;
-                        
-                        soma=contGrupo[i5]+soma;
-                        pos =i+1-soma;
-                    }
-                    for (int i1=0;i1<8;i1++){
-                        if (i1==0){
-                            informacao="|" + equipaGrupo[i][i1] + "    " + "|" +pos + "º ";
-                        }else{
-                            if (i1==6||i1==7){
-                                informacao=informacao + "|"+equipaGrupo[i][i1] +" ";
-                            }else{
-                                if (i1==1){
-                                    informacao=informacao + "|"+equipaGrupo[i][i1] +espaco;
-                                }else{
-                                informacao=informacao +"|" + equipaGrupo[i][i1];
-                                }
-                            }
-                        }
-                    }
-                    informacao=informacao+ "|" + pontuacaoDg[i][0] +"|";
-                    System.out.println("|Grupo|Pos|Seleção|J|V|E|D|GM|GF|P|");
-                    System.out.println(informacao);
-                }else{
-                    while (pos>4){
-                        int i5=0; 
-                        soma=contGrupo[i5]+soma;
-                        pos =i+1-soma;
-                    }
-                    informacao="|" + equipaGrupo[i][0] + "    "+ "|" +pos + "º " + "|";
-                    for (int cont=0;cont<equipaGrupo[i][1].length()-"selecao".length();cont++){
-                        espaco=espaco+" ";
-                    }
-                    for (int i1=1;i1<8;i1++){
-                     if (i1!=1){
-                         espaco="";
-                     }   
-                     if (i1==6||i1==7){
-                         espaco=" ";
-                     }
-                     informacao=informacao + equipaGrupo[i][i1] + espaco + "|";
-                    }
-                    
-                    informacao=informacao+ "|" + pontuacaoDg[i][0] +"|";
-                    System.out.println("|Grupo|Pos|Selecao"+espaco+"|J|V|E|D|GM|GF|P|");
-                    System.out.println(informacao);
-                }
-            
+        int cont=0;
+        for (int i = 0; i < limite; i++) {
+            if (equipaGrupo[i][1].equals(selecao)){
+                Imprime1();
+                Imprime2(equipaGrupo,i,contGrupo,pontuacaoDg);
             }else{
-                contador++;
-            }
+                cont++;
+            }   
+        
         }
-        if (contador==limite){
-            System.out.println("A seleção não é válida");
+        if (cont==limite){
+            System.out.println("Seleção inválida");
         }
     }
     public static void estatistica (String[][]equipaGrupo,int limite) throws FileNotFoundException{
