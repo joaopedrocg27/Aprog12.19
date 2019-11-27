@@ -143,7 +143,7 @@ public class TP {
             case 13:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                //missing
+                printToFile2(equipaGrupo,limite,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -411,6 +411,7 @@ public class TP {
                 }
                 break;
             default:
+                r=true;
                 System.out.println("Grupo Inválido");
         }
     return r;
@@ -887,14 +888,16 @@ public class TP {
 
         }
       soma=0;
-        for (int i = 0; i < contGrupo.length; i++) {
+        
+       
+       if (!r){
+           for (int i = 0; i < contGrupo.length; i++) {
             contGrupo[i]=2;
             soma=soma + contGrupo[i];
             
         }
-       ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
-       if (!r){
-               limite=soma;
+            ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
+            limite=soma;
        } 
         return limite;
     }
@@ -910,4 +913,14 @@ public class TP {
         out.printf("%s%.1f%n","Média de golos sofridos por jogo=",mediaGolosS);
         out.close();
     } 
+    public static void printToFile2(String[][]equipaGrupo,int limite,int [] contGrupo) throws FileNotFoundException{
+        PrintWriter out = new PrintWriter(new File("FinalStage.csv"));
+        for (int i = 0; i <limite; i++) {
+        out.println(equipaGrupo[i][0]);
+        }
+        out.close();
+    
+    
+    
+    }
 }
