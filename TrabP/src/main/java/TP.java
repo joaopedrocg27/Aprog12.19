@@ -43,14 +43,16 @@ public class TP {
                 if (jaLido[2]&&jaLido[3]){
                     System.out.println("A execução deste programa irá reinicar o que foi feito no ponto 3 e 4");
                     System.out.println("");
-                }
+                }else{
                 if (jaLido[2]){
                     System.out.println("A execução deste programa irá reinicar o que foi feito no ponto 3");
                     System.out.println("");
-                }
+                }else{
                 if (jaLido[3]){
                     System.out.println("A execução deste programa irá reinicar o que foi feito no ponto 4");
                     System.out.println("");
+                }
+                }
                 }
                 if(!jaLido[0]){
                     System.out.println("ATENÇÃO! Ficheiro ainda não lido (opção 1)");
