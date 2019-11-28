@@ -269,7 +269,7 @@ public class TP {
             case 14:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
-                //missing
+                printarMeiaFinal(equipaGrupo,limite,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -303,7 +303,7 @@ public class TP {
             //Se for verdade permite que o menu funcione
             int M;
             M=sc2.nextInt();
-            while (M!=1&&M!=2){
+            while (M!=1&&M!=2&&M!=15){
                 limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo);
                 printMenu();
                 M=sc2.nextInt();
@@ -1055,5 +1055,25 @@ public class TP {
     
     
     
+    }
+    public static void printarMeiaFinal(String[][]equipaGrupo,int limite,int[] contGrupo) throws FileNotFoundException{
+        PrintWriter out= new PrintWriter(new File("FinalStageGames.txt"));
+        int i1=0;
+            int soma=0;
+            String print;
+        for (int i=0;i<limite;i++){
+            soma=soma+contGrupo[i1];
+            if (soma-1==1){
+             print=equipaGrupo[i][0]+ ","+"1º," + equipaGrupo[i][1]+"-"+equipaGrupo[i+3][0]+",2º"+equipaGrupo[i+3][1];   
+            }else{
+                print=equipaGrupo[i][0] +",2º,"+equipaGrupo[i][1]+"-"+equipaGrupo[i1+1][0]+",1º"+equipaGrupo[i+1][1];
+            }
+            out.println(print);
+            if (i+1%2==0){
+                i +=3;
+                i1++;
+            }
+        }
+    out.close();
     }
 }
