@@ -16,7 +16,7 @@ public class TP {
         System.out.println("|7-Listar as equipas com um determinado número de golos sofridos. Insira o número de golos                    |");
         System.out.println("|8-Listar as equipas que têm mais golos sofridos do que golos marcados, ordenadas alfabeticamente             |");
         System.out.println("|9-Listar o primeiro classificado de cada grupo                                                               |");
-        System.out.println("|10-Listar informação completa de uma equipa                                       |");
+        System.out.println("|10-Listar informação completa de uma equipa                                                                  |");
         System.out.println("|11-Criar um ficheiro de texto (Statistics.txt) com estatísticas dos jogos                                    |");
         System.out.println("|12-Remover da memória as equipas que não vão disputar a fase seguinte                                        |");
         System.out.println("|13-Criar um ficheiro de texto (FinalStage.csv) com as equipas que vão disputar a fase seguinte do campeonato |");
@@ -259,7 +259,7 @@ public class TP {
                     System.out.println("Execute a opção12");
                     break;
                 }
-                printToFile2(equipaGrupo,limite,contGrupo);
+                printToFile2(equipaGrupo,limite,contGrupo,pontuacaoDg);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -1029,10 +1029,25 @@ public class TP {
         out.printf("%s%.1f%n","Média de golos sofridos por jogo=",mediaGolosS);
         out.close();
     } 
-    public static void printToFile2(String[][]equipaGrupo,int limite,int [] contGrupo) throws FileNotFoundException{
+    public static void printToFile2(String[][]equipaGrupo,int limite,int [] contGrupo,int[][] pontuacaoDg) throws FileNotFoundException{
         PrintWriter out = new PrintWriter(new File("FinalStage.csv"));
-        for (int i = 0; i <limite; i++) {
-        out.println(equipaGrupo[i][0]);
+        String []grupo = new String [16];
+        int []pos = new int [16];
+        String []equipa = new String [16];
+        int c=1;
+        for (int i = 0; i <limite; i++){
+            if(equipaGrupo[i][0]!=(null)){
+                grupo[i] = equipaGrupo[i][0];
+                pos[i]=c;
+                c++;
+                if(3==c){
+                c=1;
+            }
+            }
+            equipa[i] = equipaGrupo[i][1];
+        }
+        for (int j = 0; j <limite; j++) {
+        out.println(grupo[j]+","+pos[j]+","+equipa[j]+","+pontuacaoDg[j][0]);
         }
         out.close();
     

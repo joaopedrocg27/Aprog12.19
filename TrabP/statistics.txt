@@ -1,8 +1,0 @@
-Total de jogos=5817
-Total de vitórias=6326
-Total de empates=6347
-Total de derrotas=7102
-Total de golos marcados=14124
-Total de golos sofridos=902666
-Média de golos marcados por jogo=2.4
-Média de golos sofridos por jogo=155.2
