@@ -1061,18 +1061,19 @@ public class TP {
         int i1=0;
             int soma=0;
             String print;
-        for (int i=0;i<limite;i++){
             soma=soma+contGrupo[i1];
-            if (soma-1==1){
+        for (int i=0;i<limite;i++){
+            if ((soma-1)%2!=0){
              print=equipaGrupo[i][0]+ ","+"1º," + equipaGrupo[i][1]+"-"+equipaGrupo[i+3][0]+",2º"+equipaGrupo[i+3][1];   
             }else{
-                print=equipaGrupo[i][0] +",2º,"+equipaGrupo[i][1]+"-"+equipaGrupo[i1+1][0]+",1º"+equipaGrupo[i+1][1];
+                print=equipaGrupo[i][0] +",2º,"+equipaGrupo[i][1]+"-"+equipaGrupo[i+1][0]+",1º"+equipaGrupo[i+1][1];
             }
             out.println(print);
-            if (i+1%2==0){
-                i +=3;
+            if ((i+1)%2==0){
+                i +=2;
                 i1++;
             }
+            soma++;
         }
     out.close();
     }
