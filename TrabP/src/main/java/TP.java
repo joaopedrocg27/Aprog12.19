@@ -752,12 +752,14 @@ public class TP {
                 int pos;
                 int soma=0;
                 int i1=0;
+                int contPont=0;
                 String espaco="";
                 do{
                     pos=i-soma+1;
                     soma=soma+contGrupo[i1];
                     i1++;
-                }while(pos>4);
+                }while(pos>contGrupo[contPont]);
+                contPont++;
                 impr="|" + equipaGrupo[i][0]+ "    " + "|" + pos + "    " + "|";
                 i1=1;
                 int i2=1;
