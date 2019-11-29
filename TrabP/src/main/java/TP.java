@@ -35,6 +35,9 @@ public class TP {
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
+                for (int i=0;i<contGrupo.length;i++){
+                    contGrupo[i]=0;
+                }
                 selecPorGrupo(equipaGrupo,limite,contGrupo);
                 break;
             case 2:
@@ -124,7 +127,11 @@ public class TP {
                     System.out.println("Execute a Opção 1");
                     break;
                 }
-                maximoGolos(equipaGrupo,limite);
+                if (!jaLido[2]){
+                    System.out.println("Execute a Opção 3");
+                    break;
+                }
+                maximoGolos(equipaGrupo,limite,contGrupo,pontuacaoDg);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -136,8 +143,12 @@ public class TP {
                     System.out.println("Execute a Opção 1");
                     break;
                 }
+                if (!jaLido[2]){
+                    System.out.println("Execute a Opção 3");
+                    break;
+                }
                 System.out.println("Indicar o numero de golos sofridos");
-                sofridoGolos(equipaGrupo,limite);
+                sofridoGolos(equipaGrupo,limite,contGrupo,pontuacaoDg);
                 System.out.println("Done");
                 System.out.println(" ");
                 printMenu();
@@ -793,7 +804,7 @@ public class TP {
                 System.out.println(impr);
         
     }
-    public static void maximoGolos (String[][]equipaGrupo,int limite){
+    public static void maximoGolos (String[][]equipaGrupo,int limite,int[]contGrupo,int[][]pontuacaoDg){
         int max=0;
         for (int i=0;i<limite;i++){
             if (max<Integer.parseInt(equipaGrupo[i][6])){
@@ -802,15 +813,17 @@ public class TP {
         }
         for (int i=0;i<limite;i++){
             if (max==Integer.parseInt(equipaGrupo[i][6])){
-                System.out.println(equipaGrupo[i][1]);
+                Imprime1();
+                Imprime2(equipaGrupo,i,contGrupo,pontuacaoDg);
             }
         }
     }
-    public static void sofridoGolos (String[][]equipaGrupo,int limite){
+    public static void sofridoGolos (String[][]equipaGrupo,int limite,int[]contGrupo,int[][]pontuacaoDg){
         int goloSofr=sc2.nextInt();
         for (int i=0;i<limite;i++){
             if (goloSofr== Integer.parseInt(equipaGrupo[i][7])){
-                System.out.println(equipaGrupo[i][1]);
+                Imprime1();
+                Imprime2(equipaGrupo,i,contGrupo,pontuacaoDg);
             }
         }
     }
