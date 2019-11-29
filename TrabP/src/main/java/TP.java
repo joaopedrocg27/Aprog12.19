@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 public class TP {
-    static Scanner sc2 = new Scanner (System.in);
+    static Scanner sc2 = new Scanner (System.in,"ISO8859_15");
     public static void printMenu(){
         System.out.println("|=================================================MENU========================================================|");
         System.out.println("|Insira a opção a executar:                                                                                   |");
@@ -246,7 +246,7 @@ public class TP {
                 }
                 if (!jaLido[1]){
                     System.out.println("Como este ponto requer 2 equipas por grupo,terá de adicionar as restantes");
-                    System.out.println("Execute a Opção2");
+                    System.out.println("Execute a Opção 2");
                 }
                 if (!jaLido[2]){
                     System.out.println("Execute a Opção 3");
@@ -258,7 +258,7 @@ public class TP {
                 }
                 if (!jaLido[4]){
                     System.out.println("Este módulo requer a execução da opção 12");
-                    System.out.println("Execute a opção12");
+                    System.out.println("Execute a opção 12");
                     break;
                 }
                 printToFile2(equipaGrupo,limite,contGrupo,pontuacaoDg);
@@ -991,6 +991,15 @@ public class TP {
            }
            i1=0;
            soma=contGrupo[i]+soma;
+           if (contGrupo[i]==4){
+               pontuacaoDg[soma-2][0]=0;
+               pontuacaoDg[soma-1][0]=0;
+               pontuacaoDg[soma-2][1]=0;
+               pontuacaoDg[soma-1][0]=0;
+           }else{
+               pontuacaoDg[soma-1][0]=0;
+               pontuacaoDg[soma-1][1]=0;
+           }
            while (i1<8){
            if (contGrupo[i]==4){
                equipaGrupo[soma-2][i1]=null;
@@ -1020,7 +1029,7 @@ public class TP {
         return limite;
     }
     public static void printToFile(String[][]equipaGrupo,int limite,double mediaGolosS,double mediaGolosM,int jogos,int vitorias,int derrota,int golosM,int golosS,int empates) throws FileNotFoundException{
-        PrintWriter out = new PrintWriter(new File("statistics.txt"));
+        PrintWriter out = new PrintWriter(new File("Statistics.txt"));
         out.println("Total de jogos="+jogos);
         out.println("Total de vitórias="+vitorias);
         out.println("Total de empates="+empates);
