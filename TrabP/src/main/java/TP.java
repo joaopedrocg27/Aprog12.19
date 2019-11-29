@@ -771,7 +771,7 @@ public class TP {
                     i1++;
                 }while(pos>contGrupo[contPont]);
                 contPont++;
-                impr="|" + equipaGrupo[i][0]+ "    " + "|" + pos + "    " + "|";
+                impr="|" + equipaGrupo[i][0]+ "    " + "|    " + pos +  "|";
                 i1=1;
                 int i2=1;
                 while (i1<=9){
@@ -782,7 +782,7 @@ public class TP {
                         impr=impr + equipaGrupo[i][1]+ espaco + "|";    
                     }
                     if (i1==2){
-                        impr=impr + pontuacaoDg[i][0] + "   "+"|";
+                        impr=impr+"   " + pontuacaoDg[i][0] +"|";
                     }
                     if (i1==9){
                         if (pontuacaoDg[i][1]>=0){
@@ -820,9 +820,9 @@ public class TP {
     }
     public static void sofridoGolos (String[][]equipaGrupo,int limite,int[]contGrupo,int[][]pontuacaoDg){
         int goloSofr=sc2.nextInt();
+        Imprime1();
         for (int i=0;i<limite;i++){
             if (goloSofr== Integer.parseInt(equipaGrupo[i][7])){
-                Imprime1();
                 Imprime2(equipaGrupo,i,contGrupo,pontuacaoDg);
             }
         }
