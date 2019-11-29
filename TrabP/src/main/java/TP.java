@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 public class TP {
     static Scanner sc2 = new Scanner (System.in,"ISO8859_15");
+    //Mostra as opções do menu
     public static void printMenu(){
         System.out.println("|=================================================MENU========================================================|");
         System.out.println("|Insira a opção a executar:                                                                                   |");
@@ -25,6 +26,7 @@ public class TP {
         System.out.println("|=============================================================================================================|");
 
     }
+    //Lê o número que o utilizador escreve e executa a alínea
     public static int menu(String[][] equipaGrupo,int limite,int[][] pontuacaoDg,int M,boolean[] jaLido,int []contGrupo) throws FileNotFoundException{        
         switch (M){
             case 1:
@@ -280,6 +282,27 @@ public class TP {
             case 14:
                 System.out.println("============================================== Opçao "+M+" ======================================================");
                 System.out.println(" ");
+                if (!jaLido[0]&&!jaLido[1]){
+                    System.out.println("Execute a Opção 1");
+                    break;
+                }
+                if (!jaLido[1]){
+                    System.out.println("Como este ponto requer 2 equipas por grupo,terá de adicionar as restantes");
+                    System.out.println("Execute a Opção 2");
+                }
+                if (!jaLido[2]){
+                    System.out.println("Execute a Opção 3");
+                    break;
+                }
+                if (!jaLido[3]){
+                    System.out.println("Execute a Opção 4");
+                    break;
+                }
+                if (!jaLido[4]){
+                    System.out.println("Este módulo requer a execução da opção 12");
+                    System.out.println("Execute a opção 12");
+                    break;
+                }
                 printarMeiaFinal(equipaGrupo,limite,contGrupo);
                 System.out.println("Done");
                 System.out.println(" ");
@@ -316,7 +339,6 @@ public class TP {
             M=sc2.nextInt();
             while (M!=1&&M!=2&&M!=15){
                 limite=menu(equipaGrupo,limite,pontuacao1,M,vef,contGrupo);
-                printMenu();
                 M=sc2.nextInt();
             }
             while (M!=15){
@@ -334,6 +356,7 @@ public class TP {
     }
             }
     }
+    //Lê o ficheiro PraticalWork.csv
     public static int lerFicheiro (String[][] equipaGrupo) throws FileNotFoundException {
         File file = new File("PracticalWork.csv");
         Scanner sc = new Scanner(file);
@@ -349,6 +372,7 @@ public class TP {
         }
         return cont;
         }
+    //Lê a informação introduzida pelo utilizador
     public static int lerManualmente (String[][] equipaGrupo,int limite,int[]contGrupo){
         System.out.println("Quer adicionar mais equipas?");
         System.out.println("Se sim,escrever 'Y'");
@@ -393,6 +417,7 @@ public class TP {
         }
     return limite;   
     }
+    //Verifica se a seleção utilizada pelo utilizador é única
     public static boolean verificarRepetição(String[][]equipaGrupo,int i1,int limite){
        String resposta=sc2.nextLine();
        boolean r=false;
@@ -409,6 +434,7 @@ public class TP {
 
         return r;
     }
+    //Conta a quantidade de seleções por seleção
     public static void selecPorGrupo (String[][]equipaGrupo,int limite,int[]contGrupo){
         for (int i=0;i<limite;i++){
             switch (equipaGrupo[i][0]){
@@ -439,6 +465,7 @@ public class TP {
             }
         }
     }
+    //Verifica se o grupo inserido pelo utilizador é válido e só tem 4 seleções
     public static boolean verificarNumSelecGrup(String[][]equipaGrupo,int limite,int[] contGrupo,int i){
         boolean r=false;
         String grupo=sc2.nextLine();
@@ -537,6 +564,7 @@ public class TP {
         }
     return r;
     }
+    //Calcula a pontuação das seleções
     public static void calcularPontuacao(String[][]equipaGrupo,int limite,int [][] pontuacaoDg){
         
         for (int i=0;i<limite;i++){
@@ -544,6 +572,7 @@ public class TP {
             pontuacaoDg[i][1]=Integer.parseInt(equipaGrupo[i][6])-Integer.parseInt(equipaGrupo[i][7]);
         }
     }
+    //Organiza as seleções por grupo
     public static void ordenar(String[][]equipaGrupo,int limite,int[][] pontuacaoDg,int[]contGrupo){
         int destinoFinal=0;
         //int contG=4;
@@ -652,6 +681,7 @@ public class TP {
             }
             
         }
+    //Troca duas linhas
     public static void sortGru(String[][]equipaGrupo,int i1,int i,int limite,int[][] pontuacaoDg){
        
        for (int ia = 0; ia < 8; ia++) {
@@ -668,6 +698,12 @@ public class TP {
         pontuacaoDg[i1][1]=dgTemp; 
        
    }
+    /*Organiza as seleções dentro do grupo segundo os critérios
+    Pontuação
+    Golos marcados
+    Golos sofridos
+    Ordem alfabética
+    */
     public static void sortBetGru(String[][]equipaGrupo,int classPrim,int i,int limite,int[][] pontuacaoDg,int classUltimo){
        int i2=classPrim;
        boolean r=true;
@@ -716,6 +752,7 @@ public class TP {
        }
        
        }
+    //Verifica a ordem da linha a ver se cumpre os critérios com a linha anterior
     public static boolean check1 (int[][] pontuacaoDg,String[][]equipaGrupo,int i){
        boolean r;
        i=i-1;
@@ -746,6 +783,7 @@ public class TP {
         }
     return r;
     }
+    //Imprime a informação das seleções
     public static void imprimirGrupo (String[][]equipaGrupo,int[][]pontuacaoDg,int limite,int[]contGrupo){
         Imprime1();
         for (int i=0;i<limite;i++){
@@ -754,10 +792,12 @@ public class TP {
  
         }
     }
+    //Imprime o cabeçalho segundo os critérios
     public static void Imprime1(){
         System.out.println("| Grp | Pos | Equipa          | Pts| V  | J  | E  | D  | GM | GS | GD |");
         System.out.println("|=====|=====|=================|====|====|====|====|====|====|====|====|");
     }
+    //Imprime a informação de cada seleção segundo os critérios
     public static void Imprime2(String[][]equipaGrupo,int i,int[]contGrupo,int[][] pontuacaoDg){
                 String impr;
                 int pos;
@@ -804,6 +844,7 @@ public class TP {
                 System.out.println(impr);
         
     }
+    //Mostra a equipa com mais golos marcados
     public static void maximoGolos (String[][]equipaGrupo,int limite,int[]contGrupo,int[][]pontuacaoDg){
         int max=0;
         for (int i=0;i<limite;i++){
@@ -818,6 +859,7 @@ public class TP {
             }
         }
     }
+    //Mostra as seleções com o número de golos sofridos especificados pelo utilizador
     public static void sofridoGolos (String[][]equipaGrupo,int limite,int[]contGrupo,int[][]pontuacaoDg){
         int goloSofr=sc2.nextInt();
         Imprime1();
@@ -827,6 +869,7 @@ public class TP {
             }
         }
     }
+    //Mostra as seleções com mais golos sofridos que marcados organizadas por ordem alfabética
     public static void ordenarDiferencaGolos (String[][]equipaGrupo,int limite,int[][]pontuacaoDg,int[] contGrupo){
         int contEqui=0;
         for (int i=0;i<limite;i++){
@@ -866,6 +909,7 @@ public class TP {
         }
         
     }
+    //Lista os primeiros elementos de cada grupo
     public static void primeiroGrupo(String[][]equipaGrupo,int limite,int[][] pontuacaoDg,int[]contGrupo){
         //calcularPontuacao(equipaGrupo,limite,pontuacaoDg);
         //ordenar(equipaGrupo,limite,pontuacaoDg,contGrupo);
@@ -875,28 +919,28 @@ public class TP {
             if(contGrupo[i]==0){
                 switch(equipaGrupo[aux][0]){
                     case "B":
-                        System.out.println("|A    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        System.out.println("|A    |  Nan|Grupo vazio!     | Nan| Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
                         break;
                     case "C":
-                        System.out.println("|B    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        System.out.println("|B    |  Nan|Grupo vazio!     | Nan| Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
                         break;
                     case "D":
-                        System.out.println("|C    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        System.out.println("|C    |  Nan|Grupo vazio!     | Nan| Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
                         break;
                     case "E":
-                        System.out.println("|D    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        System.out.println("|D    |  Nan|Grupo vazio!     | Nan| Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
                         break;
                     case "F":
-                        System.out.println("|E    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        System.out.println("|E    |  Nan|Grupo vazio!     | Nan| Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
                         break;
                     case "G":
-                        System.out.println("|F    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        System.out.println("|F    |  Nan|Grupo vazio!     | Nan| Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
                         break;
                     case "H":
-                        System.out.println("|G    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        System.out.println("|G    |  Nan|Grupo vazio!     | Nan| Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
                         break;
                     default:
-                        System.out.println("|H    |Nan  |Grupo vazio!     |Nan | Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
+                        System.out.println("|H    |  Nan|Grupo vazio!     | Nan| Nan| Nan| Nan| Nan| Nan| Nan| Nan|");
                         break;
                 }
                 
@@ -914,6 +958,7 @@ public class TP {
             
     } 
     }
+    //Lista informação sobre uma seleção especificada por utilizador
     public static void listarInformacaoSelecao(String[][]equipaGrupo,int limite,int [][]pontuacaoDg,int[] contGrupo){
         sc2.nextLine();
         System.out.println("Introduza a seleção para a qual quer mais informação");
@@ -932,6 +977,7 @@ public class TP {
             System.out.println("Seleção inválida");
         }
     }
+    //Calcula a informação segundo os critérios
     public static void estatistica (String[][]equipaGrupo,int limite) throws FileNotFoundException{
         int jogos=0,vitorias=0,empates=0,derrota=0,golosM=0,golosS=0;
         double mediaGoloM,mediaGoloS;
@@ -948,6 +994,7 @@ public class TP {
         printToFile(equipaGrupo,limite,mediaGoloS,mediaGoloM,jogos,vitorias,derrota,golosM,golosS,empates);
         
     }
+    //Remove as seleções que não ficaram em primeiro e em segundo lugar da memória
     public static int limparMemoria (String[][]equipaGrupo,int limite,int[] contGrupo,int[][] pontuacaoDg,boolean[] jaLido){
        boolean r=false;
         for (int i = 0; i < contGrupo.length; i++) {
@@ -1043,6 +1090,7 @@ public class TP {
        } 
         return limite;
     }
+    //Imprime para um ficheiro a informação de estatistica
     public static void printToFile(String[][]equipaGrupo,int limite,double mediaGolosS,double mediaGolosM,int jogos,int vitorias,int derrota,int golosM,int golosS,int empates) throws FileNotFoundException{
         PrintWriter out = new PrintWriter(new File("Statistics.txt"));
         out.println("Total de jogos="+jogos);
@@ -1055,6 +1103,7 @@ public class TP {
         out.printf("%s%.1f%n","Média de golos sofridos por jogo=",mediaGolosS);
         out.close();
     } 
+    //Imprime para um ficheiro as equipas que ficaram em primeiro e em segundo
     public static void printToFile2(String[][]equipaGrupo,int limite,int [] contGrupo,int[][] pontuacaoDg) throws FileNotFoundException{
         PrintWriter out = new PrintWriter(new File("FinalStage.csv"));
         String []grupo = new String [16];
@@ -1080,6 +1129,7 @@ public class TP {
     
     
     }
+    //Imprime para um ficheiro as equipas que vão disputar as meias finais
     public static void printarMeiaFinal(String[][]equipaGrupo,int limite,int[] contGrupo) throws FileNotFoundException{
         PrintWriter out= new PrintWriter(new File("FinalStageGames.txt"));
         int i1=0;
